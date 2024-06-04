@@ -5,6 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/green</item>
         <item name="colorOutline">@color/green</item>
+        <item name="colorSecondaryContainer" />
+        <item name="colorOnSecondaryContainer">@color/green</item>
+        <item name="colorOnSurface">@color/green</item>
+        <item name="colorPrimaryContainer">@color/green</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
     </style>
 
     <style name="Theme.Have" parent="Base.Theme.Have" />

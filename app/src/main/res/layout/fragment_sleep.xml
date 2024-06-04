@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".iu.SleepFragment">
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:text="Sleep Analysis"
+        style="@style/CustomTextView"
+        android:textStyle="bold"
+        android:textSize="33sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="21dp"/>
+
+    <TextView
+        android:id="@+id/textDate"
+        android:text="May 20, 2024"
+        style="@style/CustomTextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTitle"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="7dp"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="45.42dp"
+        android:layout_marginStart="103.42dp"
+        android:layout_marginEnd="103.42dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDate" />
+
+    <TextView
+        android:id="@+id/textQuality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quality"
+        android:textColor="@color/green"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@id/progressBar"
+        app:layout_constraintStart_toStartOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        android:layout_marginTop="70dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="80%"
+        android:textColor="@color/green"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textQuality"
+        app:layout_constraintStart_toStartOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textHour"
+        android:text="7h 30m"
+        style="@style/CustomTextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"/>
+
+    <TextView
+        android:id="@+id/textSleepDuration"
+        android:text="Sleep Duration"
+        style="@style/CustomTextView"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHour"/>
+
+    <include
+        android:id="@+id/itemCard"
+        layout="@layout/item_sleep_time"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintTop_toBottomOf="@id/textSleepDuration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/statistic_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/itemCard"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
