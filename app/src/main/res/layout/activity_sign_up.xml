@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".iu.SignupActivity">
+    tools:context=".ui.signup.SignUpActivity">
 
     <TextView
         android:id="@+id/headerTextView"
@@ -13,80 +13,59 @@
         android:text="@string/create_your_account"
         style="@style/CustomTextView.Header"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/nameTextView"
-        android:layout_marginTop="30dp"
+        android:id="@+id/tv_name"
         style="@style/CustomTextView.Textfield"
+        android:layout_marginTop="30dp"
         android:alpha="0"
         android:text="@string/name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerTextView"
+        app:layout_constraintVertical_bias="0.0"
         tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameEditTextLayout"
+        android:id="@+id/layout_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
         android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_constraintVertical_bias="0.0"
+        tools:alpha="100">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_signup_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            android:inputType="textPersonName"
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/birthdateTextView"
-        android:layout_marginTop="16dp"
+        android:id="@+id/tv_phoneNumber"
         style="@style/CustomTextView.Textfield"
-        android:alpha="0"
-        android:text="@string/birthdate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout"
-        tools:alpha="100" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthdateEditTextLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="21dp"
-        android:alpha="0"
+        android:layout_marginTop="16dp"
+        android:text="@string/email"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthdateTextView"
-        tools:alpha="100" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_birthdate"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:inputType="date"
-            tools:ignore="SpeakableTextPresentCheck"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/phoneNumberTextView"
-        android:layout_marginTop="16dp"
-        style="@style/CustomTextView.Textfield"
-        android:alpha="0"
-        android:text="@string/phone_number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthdateEditTextLayout"
-        tools:alpha="100" />
+        app:layout_constraintTop_toBottomOf="@id/layout_name"
+        app:layout_constraintVertical_bias="0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phoneNumberEditTextLayout"
@@ -95,18 +74,20 @@
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
         android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumberTextView"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/tv_phoneNumber"
+        app:layout_constraintVertical_bias="0.0"
+        tools:alpha="100">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_phone_number"
+            android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
             android:inputType="phone"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -163,7 +144,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
         tools:alpha="100" >
 
-        <com.capstone.have.iu.PasswordEditText
+        <EditText
             android:id="@+id/ed_signup_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -173,12 +154,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/signinButton"
+        android:id="@+id/btn_signUp"
         android:layout_width="161dp"
         android:layout_height="51dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/btn_shape"
-        android:text="@string/signin"
+        android:text="@string/sign_up"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".iu.OverviewAddActivity">
+    tools:context=".ui.activity.OverviewAddActivity">
 
     <ImageView
         android:id="@+id/imageView"

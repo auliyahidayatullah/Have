@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".iu.LoginActivity">
+    tools:context=".ui.login.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
         tools:alpha="100" >
 
-        <com.capstone.have.iu.PasswordEditText
+        <EditText
             android:id="@+id/ed_signin_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -79,60 +79,17 @@
             tools:ignore="SpeakableTextPresentCheck"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/noAccountTextView"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="21dp"
-        android:text="@string/dont_have_account"
-        android:textSize="17sp"
-        style="@style/CustomTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
-
-    <TextView
-        android:id="@+id/signupTextView"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:layout_marginTop="21dp"
-        android:text="@string/sign_up"
-        android:textSize="17sp"
-        style="@style/CustomTextView"
-        app:layout_constraintStart_toEndOf="@id/noAccountTextView"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
-
     <Button
-        android:id="@+id/signinButton"
+        android:id="@+id/btn_signIn"
         android:layout_width="161dp"
         android:layout_height="51dp"
-        android:layout_marginTop="40dp"
         android:background="@drawable/btn_shape"
         android:text="@string/signin"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noAccountTextView" />
-
-    <TextView
-        android:id="@+id/orSignInUsingTextView"
-        android:layout_marginTop="40dp"
-        android:text="@string/or_sign_in_using"
-        android:textSize="17sp"
-        style="@style/CustomTextView"
-        app:layout_constraintTop_toBottomOf="@+id/signinButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" />
-
-    <ImageView
-        android:id="@+id/googleSignInButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/ic_google"
-        android:contentDescription="@string/google_sign_in"
-        app:layout_constraintTop_toBottomOf="@+id/orSignInUsingTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
+        app:layout_constraintVertical_bias="0.13999999" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

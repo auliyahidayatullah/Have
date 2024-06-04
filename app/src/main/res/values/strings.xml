@@ -13,6 +13,7 @@
     <string name="password">Password</string>
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="signin">Sign In</string>
+    <string name="signup">Sign Up</string>
     <string name="or_sign_in_using">Or sign in using:</string>
     <string name="sign_up">Sign Up</string>
     <string name="google_sign_in">Google Sign In</string>
@@ -29,4 +30,6 @@
     <string name="time">Time</string>
     <string name="activity_name">Activity Name</string>
     <string name="delete">Delete</string>
+    <string name="select_date">Select Date</string>
+    <string name="email">Email</string>
 </resources>
