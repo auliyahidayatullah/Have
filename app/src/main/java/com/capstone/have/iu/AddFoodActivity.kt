@@ -12,7 +12,6 @@ import com.capstone.have.databinding.ActivityAddFoodBinding
 
 class AddFoodActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
 private lateinit var binding: ActivityAddFoodBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,23 +19,5 @@ private lateinit var binding: ActivityAddFoodBinding
 
      binding = ActivityAddFoodBinding.inflate(layoutInflater)
      setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_add_food)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null)
-                    .setAnchorView(R.id.fab).show()
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-    val navController = findNavController(R.id.nav_host_fragment_content_add_food)
-    return navController.navigateUp(appBarConfiguration)
-            || super.onSupportNavigateUp()
     }
 }
