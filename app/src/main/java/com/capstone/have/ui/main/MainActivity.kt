@@ -23,24 +23,13 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        try {
-            Log.d("MainActivity", "Attempting to find NavController")
-            val navController = findNavController(R.id.nav_host_fragment_activity_main)
-            val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.navigation_home, R.id.navigation_sleep, R.id.navigation_activity, R.id.navigation_calorie
-                )
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_sleep, R.id.navigation_activity, R.id.navigation_calorie
             )
-            setupActionBarWithNavController(navController, appBarConfiguration)
-            navView.setupWithNavController(navController)
-            Log.d("MainActivity", "NavController setup successful")
-        } catch (e: Exception) {
-            Log.e("MainActivity", "Error setting up NavController", e)
-        }
+        )
+        navView.setupWithNavController(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
 }
