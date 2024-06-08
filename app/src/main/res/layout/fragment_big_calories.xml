@@ -4,32 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".iu.BigCaloriesFragment">
+    tools:context=".ui.menu.calorie.BigCaloriesFragment">
 
     <TextView
-        android:id="@+id/textHeader"
-        android:text="Top 3 Big Calories"
+        android:id="@+id/header_bigCalories"
         style="@style/CustomTextView"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="21dp"
+        android:text="@string/top_3_big_calories"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textDesc"
+        android:id="@+id/desc_bigCalories"
         style="@style/CustomTextView"
-        android:text="Be aware of this food..."
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/be_aware_of_this_food"
         android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textHeader"/>
+        app:layout_constraintTop_toBottomOf="@id/header_bigCalories"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         android:scrollbars="horizontal"
-        tools:listitem="@layout/item_card_image"
-        app:layout_constraintTop_toBottomOf="@id/textDesc"/>
+        tools:listitem="@layout/item_calorie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc_bigCalories"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

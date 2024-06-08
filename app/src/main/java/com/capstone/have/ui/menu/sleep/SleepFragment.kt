@@ -1,4 +1,4 @@
-package com.capstone.have.iu
+package com.capstone.have.ui.menu.sleep
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,22 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.capstone.have.R
 
-class HomeFragment : Fragment() {
+class SleepFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_sleep, container, false)
 
         // Setup child fragment
         childFragmentManager.beginTransaction()
-            .replace(R.id.upcomingActivity, UpcomingActivityFragment())
-            .commit()
-
-        childFragmentManager.beginTransaction()
-            .replace(R.id.card_container, ExerciseRecFragment())
+            .replace(R.id.statistic_container, SleepStatisticFragment())
             .commit()
 
         return view

@@ -5,10 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+        android:id="@+id/cardview_calorie"
         android:layout_width="154dp"
         android:layout_height="177dp"
         android:layout_marginStart="21dp"
+        android:layout_marginTop="15dp"
         app:cardElevation="10dp"
         style="?attr/materialCardViewElevatedStyle"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +21,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageFood"
+                android:id="@+id/img_recomFood"
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
                 android:scaleType="centerCrop"
@@ -34,7 +35,7 @@
 
                 <TextView
                     android:id="@+id/textFoodName"
-                    android:text="Name"
+                    android:text="@string/food_name"
                     style="@style/CustomTextView"
                     android:textStyle="bold"
                     android:textSize="17sp"
@@ -52,7 +53,8 @@
                     android:layout_marginTop="5dp"/>
 
                 <TextView
-                    android:text="300 kcal"
+                    android:id="@+id/calorie_count"
+                    android:text="calories"
                     style="@style/CustomTextView"
                     android:textSize="18sp"
                     app:layout_constraintTop_toBottomOf="@id/textFoodName"

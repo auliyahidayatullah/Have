@@ -89,12 +89,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEditTextLayout" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvActivity"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="68dp"
-        tools:listitem="@layout/item_activity"
-        app:layout_constraintTop_toBottomOf="@id/addButton"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

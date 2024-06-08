@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".iu.ExerciseRecFragment">
+    tools:context=".ui.menu.activity.ExerciseRecFragment">
 
     <TextView
-        android:id="@+id/tvUpcomingAct"
+        android:id="@+id/header_upcomingActivity"
         android:layout_width="239dp"
-        android:text="Exercise Recommendation"
+        android:text="@string/exercise_recommendation"
         style="@style/CustomTextView"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:orientation="horizontal"
         android:scrollbars="horizontal"
-        tools:listitem="@layout/item_card_image" />
+        tools:listitem="@layout/item_calorie" />
 </FrameLayout>

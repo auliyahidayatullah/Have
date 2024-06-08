@@ -5,7 +5,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome,"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -38,4 +38,22 @@
     <string name="title_calorie">Calorie</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
+    <string name="add_food">Add food</string>
+    <string name="see_details">See Details</string>
+    <string name="targets">Targets :</string>
+    <string name="your_calories">Your Calories</string>
+    <string name="calorie">Calorie</string>
+    <string name="exercise_recommendation">Exercise Recommendation</string>
+    <string name="food_recommendation">Food Recommendation</string>
+    <string name="sleep_analysis">Sleep Analysis</string>
+    <string name="currentdate">CurrentDate</string>
+    <string name="quality">Quality</string>
+    <string name="percentage">Percentage</string>
+    <string name="sleep_hour">Sleep Hour</string>
+    <string name="sleep_duration">Sleep Duration</string>
+    <string name="upcoming_activity">Upcoming Activity</string>
+    <string name="hour">Hour</string>
+    <string name="food_name">Food Name</string>
+    <string name="top_3_big_calories">Top 3 Big Calories</string>
+    <string name="be_aware_of_this_food">Be aware of this food...</string>
 </resources>

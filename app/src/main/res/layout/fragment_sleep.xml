@@ -4,30 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".iu.SleepFragment">
+    tools:context=".ui.menu.sleep.SleepFragment">
 
     <TextView
-        android:id="@+id/textTitle"
-        android:text="Sleep Analysis"
+        android:id="@+id/header_sleep"
+        android:text="@string/sleep_analysis"
         style="@style/CustomTextView"
         android:textStyle="bold"
         android:textSize="33sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="21dp"/>
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"/>
 
     <TextView
-        android:id="@+id/textDate"
-        android:text="May 20, 2024"
+        android:id="@+id/tv_date"
+        android:text="@string/currentdate"
         style="@style/CustomTextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTitle"
+        app:layout_constraintTop_toBottomOf="@id/header_sleep"
         android:layout_marginStart="21dp"
         android:layout_marginTop="7dp"/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_sleep"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="45.42dp"
@@ -36,52 +37,52 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDate" />
+        app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
     <TextView
-        android:id="@+id/textQuality"
+        android:id="@+id/tv_quality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quality"
+        android:text="@string/quality"
         android:textColor="@color/green"
         android:textSize="14sp"
-        app:layout_constraintTop_toTopOf="@id/progressBar"
-        app:layout_constraintStart_toStartOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        app:layout_constraintTop_toTopOf="@id/progress_sleep"
+        app:layout_constraintStart_toStartOf="@id/progress_sleep"
+        app:layout_constraintEnd_toEndOf="@id/progress_sleep"
         android:layout_marginTop="70dp"
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/textProgress"
+        android:id="@+id/sleep_percentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="80%"
+        android:text="@string/percentage"
         android:textColor="@color/green"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/textQuality"
-        app:layout_constraintStart_toStartOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        app:layout_constraintTop_toBottomOf="@id/tv_quality"
+        app:layout_constraintStart_toStartOf="@id/progress_sleep"
+        app:layout_constraintEnd_toEndOf="@id/progress_sleep"
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/textHour"
-        android:text="7h 30m"
+        android:id="@+id/sleep_hour"
+        android:text="@string/sleep_hour"
         style="@style/CustomTextView"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar"/>
+        app:layout_constraintTop_toBottomOf="@id/progress_sleep"/>
 
     <TextView
-        android:id="@+id/textSleepDuration"
-        android:text="Sleep Duration"
+        android:id="@+id/tv_duration"
+        android:text="@string/sleep_duration"
         style="@style/CustomTextView"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textHour"/>
+        app:layout_constraintTop_toBottomOf="@id/sleep_hour"/>
 
     <include
         android:id="@+id/itemCard"
@@ -89,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@id/textSleepDuration"
+        app:layout_constraintTop_toBottomOf="@id/tv_duration"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

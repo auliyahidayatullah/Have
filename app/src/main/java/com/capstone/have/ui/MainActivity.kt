@@ -1,4 +1,4 @@
-package com.capstone.have.ui.main
+package com.capstone.have.ui
 
 import android.os.Bundle
 import android.util.Log

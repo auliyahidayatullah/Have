@@ -1,4 +1,4 @@
-package com.capstone.have.iu
+package com.capstone.have.ui.menu.calorie
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
