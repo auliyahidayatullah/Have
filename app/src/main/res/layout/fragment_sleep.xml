@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.menu.sleep.SleepFragment">
+    tools:context=".ui.fragments.sleep.SleepFragment">
 
     <TextView
         android:id="@+id/header_sleep"

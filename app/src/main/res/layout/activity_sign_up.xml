@@ -56,7 +56,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_phoneNumber"
+        android:id="@+id/tv_email"
         style="@style/CustomTextView.Textfield"
         android:layout_marginTop="16dp"
         android:text="@string/email"
@@ -68,7 +68,7 @@
         app:layout_constraintVertical_bias="0" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneNumberEditTextLayout"
+        android:id="@+id/layout_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
@@ -77,31 +77,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_phoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email"
         app:layout_constraintVertical_bias="0.0"
         tools:alpha="100">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.capstone.have.ui.validation.EmailValidation
             android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/usernameTextView"
+        android:id="@+id/tv_username"
         android:layout_marginTop="16dp"
         style="@style/CustomTextView.Textfield"
         android:alpha="0"
         android:text="@string/username"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditTextLayout"
+        app:layout_constraintTop_toBottomOf="@+id/layout_email"
         tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameEditTextLayout"
+        android:id="@+id/layout_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
@@ -109,7 +109,7 @@
         android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tv_username"
         tools:alpha="100" >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -128,11 +128,11 @@
         android:text="@string/password"
         style="@style/CustomTextView.Textfield"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEditTextLayout"
+        app:layout_constraintTop_toBottomOf="@+id/layout_username"
         tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordEditTextLayout"
+        android:id="@+id/layout_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
@@ -144,7 +144,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
         tools:alpha="100" >
 
-        <EditText
+        <com.capstone.have.ui.validation.PasswordValidation
             android:id="@+id/ed_signup_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -163,7 +163,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

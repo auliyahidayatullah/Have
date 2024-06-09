@@ -1,4 +1,4 @@
-package com.capstone.have.ui.menu.calorie
+package com.capstone.have.ui.fragments.sleep
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,21 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.capstone.have.R
 
-class CalorieFragment : Fragment() {
+class SleepFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_calorie, container, false)
+        val view = inflater.inflate(R.layout.fragment_sleep, container, false)
 
+        // Setup child fragment
         childFragmentManager.beginTransaction()
-            .replace(R.id.top_calorie_container, BigCaloriesFragment())
-            .commit()
-
-        childFragmentManager.beginTransaction()
-            .replace(R.id.food_rec_container, FoodRecomFragment())
+            .replace(R.id.statistic_container, SleepStatisticFragment())
             .commit()
 
         return view

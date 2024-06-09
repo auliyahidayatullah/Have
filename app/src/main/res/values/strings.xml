@@ -56,4 +56,10 @@
     <string name="food_name">Food Name</string>
     <string name="top_3_big_calories">Top 3 Big Calories</string>
     <string name="be_aware_of_this_food">Be aware of this food...</string>
+    <string name="tv_landing2">Activity Management</string>
+    <string name="desc_landing2">Often overwhelmed by work? We will help organize and remember your activities.</string>
+    <string name="tv_landing3">Sleep Management</string>
+    <string name="desc_landing3">Often sleepy in the morning? We are ready to improve your sleep patterns</string>
+    <string name="tv_landing4">Calorie Management</string>
+    <string name="desc_landing4">Often not confident? Arrange your diet with us.</string>
 </resources>

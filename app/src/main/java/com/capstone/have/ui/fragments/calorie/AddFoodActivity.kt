@@ -1,13 +1,7 @@
-package com.capstone.have.ui.menu.calorie
+package com.capstone.have.ui.fragments.calorie
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.capstone.have.R
 import com.capstone.have.databinding.ActivityAddFoodBinding
 
 class AddFoodActivity : AppCompatActivity() {
