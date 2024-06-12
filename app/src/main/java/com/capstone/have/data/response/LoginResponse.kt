@@ -2,19 +2,20 @@ package com.capstone.have.data.response
 
 import com.google.gson.annotations.SerializedName
 
-
 data class LoginResponse(
-	@SerializedName("data")
-	val data: Data? = null,
 
-	@SerializedName("message")
+	@field:SerializedName("data")
+	val data: LoginData? = null,
+
+	@field:SerializedName("message")
 	val message: String? = null,
 
-	@SerializedName("status")
+	@field:SerializedName("status")
 	val status: String? = null
 )
 
-data class Data(
-	@SerializedName("token")
+data class LoginData(
+
+	@field:SerializedName("token")
 	val token: String? = null
 )

@@ -2,10 +2,10 @@ package com.capstone.have.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+data class AddCalorieResponse(
 
 	@field:SerializedName("data")
-	val data: RegisterData? = null,
+	val data: AddCalorieData? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -14,8 +14,8 @@ data class RegisterResponse(
 	val status: String? = null
 )
 
-data class RegisterData(
+data class AddCalorieData(
 
-	@field:SerializedName("userId")
-	val userId: String? = null
+	@field:SerializedName("calorieId")
+	val calorieId: String? = null
 )
