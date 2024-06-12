@@ -49,12 +49,10 @@
     <TextView
         android:id="@+id/textViewFoodName"
         style="@style/CustomTextView.Textfield"
-        android:alpha="0"
         android:text="Food Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:layout_marginTop="28dp"
-        tools:alpha="100" />
+        android:layout_marginTop="28dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/foodNameEditTextLayout"
@@ -62,11 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFoodName"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/textViewFoodName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_food_name"
@@ -79,12 +75,10 @@
     <TextView
         android:id="@+id/textViewCalorie"
         style="@style/CustomTextView.Textfield"
-        android:alpha="0"
         android:text="Calories (kcal)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodNameEditTextLayout"
-        android:layout_marginTop="16dp"
-        tools:alpha="100" />
+        android:layout_marginTop="16dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/caloriesEditTextLayout"
@@ -92,11 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCalorie"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/textViewCalorie">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_calories"

@@ -1,5 +1,6 @@
 package com.capstone.have.data.retrofit
 
+import com.capstone.have.data.response.AddActivityResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import retrofit2.http.Field
@@ -22,4 +23,12 @@ interface ApiService {
         @Field("username") username: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @FormUrlEncoded
+    @POST("/activity")
+    suspend fun addActivity(
+        @Field("name") name: String,
+        @Field("duration") duration: String
+    ): AddActivityResponse
+
 }

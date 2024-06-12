@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.have.R
 import com.capstone.have.databinding.ActivityAddFoodBinding
-import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class AddFoodActivity : AppCompatActivity() {
 

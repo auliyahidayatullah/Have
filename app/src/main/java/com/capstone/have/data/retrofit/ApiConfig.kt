@@ -32,7 +32,7 @@ object ApiConfig {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://0.0.0.0:5000/")
+            .baseUrl("https://have-api-tumfaqz26a-et.a.run.app")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

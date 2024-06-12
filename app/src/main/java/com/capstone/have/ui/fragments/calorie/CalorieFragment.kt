@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 import com.capstone.have.databinding.FragmentCalorieBinding
 import com.capstone.have.ImageClassifierHelper
 import org.tensorflow.lite.task.vision.classifier.Classifications
-import java.text.NumberFormat
+import java.util.Locale
 
 class CalorieFragment : Fragment() {
 
@@ -44,8 +44,20 @@ class CalorieFragment : Fragment() {
             showPictureDialog()
         }
 
+        setupCameraLauncher()
         setupGalleryLauncher()
         setupFileLauncher()
+    }
+
+    private fun setupCameraLauncher() {
+        cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val imageUri = result.data?.data
+                imageUri?.let { uri ->
+                    handleImageUri(uri)
+                }
+            }
+        }
     }
 
     private fun setupGalleryLauncher() {
@@ -128,7 +140,10 @@ class CalorieFragment : Fragment() {
                         if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                             val result = it[0].categories[0]
                             val displayResult = "${result.label}: ${result.score}"
-                            moveToNextActivity(uri, displayResult)
+                            Log.d("CalorieFragment", "Raw classification result: $displayResult")
+                            val calories = extractCaloriesFromResult(result.label, result.score)
+                            Log.d("CalorieFragment", "Calories extracted: $calories")
+                            moveToNextActivity(uri, calories)
                         } else {
                             showToast("No classification result available.")
                         }
@@ -139,11 +154,22 @@ class CalorieFragment : Fragment() {
         classifierHelper.classifyStaticImage(uri)
     }
 
-    private fun moveToNextActivity(imageUri: Uri, classificationResult: String) {
+    private fun moveToNextActivity(imageUri: Uri, calories: String) {
         val intent = Intent(requireContext(), AddFoodActivity::class.java)
         intent.putExtra("imageUri", imageUri.toString())
-        intent.putExtra("classificationResult", classificationResult)
+        intent.putExtra("calories", calories)
         startActivity(intent)
+    }
+
+    private fun extractCaloriesFromResult(label: String, score: Float): String {
+        // Log the result for debugging
+        Log.d("CalorieFragment", "Classification result: $label")
+
+        // Format the score to a string with 2 decimal places
+        val formattedScore = String.format(Locale.getDefault(), "%.2f", score)
+
+
+        return formattedScore
     }
 
     private fun showToast(message: String) {
