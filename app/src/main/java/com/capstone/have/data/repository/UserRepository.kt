@@ -24,7 +24,7 @@ class UserRepository private constructor(
     }
 
     suspend fun register(fullname :String, username: String, email: String, password: String): RegisterResponse {
-        return apiService.register(fullname, username, email, password)
+        return apiService.register(fullname, email, username, password)
     }
 
 

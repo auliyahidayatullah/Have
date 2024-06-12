@@ -23,7 +23,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnSignUp.setOnClickListener(this)
-
+        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -32,10 +32,12 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, OverviewAddActivity::class.java))
                 finish()
             }
         }
     }
+
     override fun onClick(v: View?) {
         if (v?.id == R.id.btn_signUp) {
             val name = binding.edSignupName.text.toString().trim()
@@ -43,9 +45,9 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
             val username = binding.edSignupUsername.text.toString().trim()
             val password = binding.edSignupPassword.text.toString().trim()
 
-            if (name.isNotBlank() && email.isNotBlank() && password.isNotBlank() && username.isNotBlank()) {
-                viewModel.register(name, email, password, username)
-                startActivity(Intent(this, OverviewAddActivity::class.java))
+            if (name.isNotBlank() && email.isNotBlank() && username.isNotBlank() && password.isNotBlank()) {
+                viewModel.register(name, email,username, password)
+
             } else {
                 Toast.makeText(this, "Semua bidang harus diisi", Toast.LENGTH_SHORT).show()
             }

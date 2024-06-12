@@ -16,7 +16,7 @@ class SignUpViewModel (private val repository: UserRepository) : ViewModel() {
     fun register(name: String, username: String, email: String, password: String) {
         viewModelScope.launch {
             try {
-                val response = repository.register(name, username,email, password)
+                val response = repository.register(name,email, username, password)
                 _registerResult.postValue(response)
             } catch (e: Exception) {
                 _registerResult.postValue(RegisterResponse(status = "failed", message = e.message))

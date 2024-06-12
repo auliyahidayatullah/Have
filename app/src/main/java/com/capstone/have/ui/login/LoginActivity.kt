@@ -1,11 +1,20 @@
 package com.capstone.have.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.have.data.preference.UserModel
 import com.capstone.have.databinding.ActivityLoginBinding
+import com.capstone.have.ui.main.MainActivity
+import com.capstone.have.ui.ViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<SignInViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     private lateinit var binding : ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,23 +31,24 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-//            viewModel.login(email, password)
+            viewModel.login(email, password)
         }
+
+        observeViewModel()
     }
 
-//    private fun observeViewModel() {
-//        viewModel.loginResult.observe(this) { result ->
-//            if (result.error == true) {
-//                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-//            } else {
-//                result.loginResult?.let { loginResult ->
-//                    val name = loginResult.name ?: ""
-//                    val token = loginResult.token ?: ""
-//                    viewModel.saveSession(UserModel(name, token))
-//                    startActivity(Intent(this, MainActivity::class.java))
-//                    finish()
-//                }
-//            }
-//        }
-//    }
+    private fun observeViewModel() {
+        viewModel.loginResult.observe(this) { result ->
+            if (result.status == "fail") {
+                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+            } else {
+                result.data?.let { loginResult ->
+                    val token = loginResult.token ?: ""
+                    viewModel.saveSession(UserModel(token))
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+            }
+        }
+    }
 }

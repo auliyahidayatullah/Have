@@ -14,13 +14,13 @@ class SignInViewModel (private val repository: UserRepository) : ViewModel() {
     private val _loginResult = MutableLiveData<LoginResponse>()
     val loginResult: LiveData<LoginResponse> = _loginResult
 
-    fun login(email: String, password: String) {
+    fun login(username: String, password: String) {
         viewModelScope.launch {
             try {
-                val response = repository.login(email, password)
+                val response = repository.login(username, password)
                 _loginResult.postValue(response)
             } catch (e: Exception) {
-                _loginResult.postValue(LoginResponse(status = "failed", message = e.message))
+                _loginResult.postValue(LoginResponse(status = "fail", message = e.message))
             }
         }
     }

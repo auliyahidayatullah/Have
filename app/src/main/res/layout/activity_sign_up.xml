@@ -9,6 +9,8 @@
 
     <TextView
         android:id="@+id/headerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/create_your_account"
         style="@style/CustomTextView.Header"
@@ -20,36 +22,34 @@
 
     <TextView
         android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/CustomTextView.Textfield"
         android:layout_marginTop="30dp"
-        android:alpha="0"
         android:text="@string/name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerTextView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:alpha="100" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_name"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
-        app:layout_constraintVertical_bias="0.0"
-        tools:alpha="100">
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_signup_name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -57,6 +57,8 @@
 
     <TextView
         android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/CustomTextView.Textfield"
         android:layout_marginTop="16dp"
         android:text="@string/email"
@@ -69,22 +71,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_email"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email"
-        app:layout_constraintVertical_bias="0.0"
-        tools:alpha="100">
+        app:layout_constraintVertical_bias="0.0">
 
         <com.capstone.have.ui.validation.EmailValidation
             android:id="@+id/ed_email"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -93,29 +93,27 @@
     <TextView
         android:id="@+id/tv_username"
         android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/CustomTextView.Textfield"
-        android:alpha="0"
         android:text="@string/username"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_email"
-        tools:alpha="100" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_email" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_username"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_username"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/tv_username">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_signup_username"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
             tools:ignore="SpeakableTextPresentCheck"/>
@@ -123,31 +121,29 @@
 
     <TextView
         android:id="@+id/passwordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:alpha="0"
         android:text="@string/password"
         style="@style/CustomTextView.Textfield"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_username"
-        tools:alpha="100" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_username" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_password"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView">
 
         <com.capstone.have.ui.validation.PasswordValidation
             android:id="@+id/ed_signup_password"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck"/>

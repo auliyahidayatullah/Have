@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.retrofit.Injection
 import com.capstone.have.ui.login.SignInViewModel
+import com.capstone.have.ui.main.MainViewModel
 import com.capstone.have.ui.signup.SignUpViewModel
 
 class ViewModelFactory (private val userRepository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -13,6 +14,9 @@ class ViewModelFactory (private val userRepository: UserRepository) : ViewModelP
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(userRepository) as T
+            }
             modelClass.isAssignableFrom(SignInViewModel::class.java) -> {
                 SignInViewModel(userRepository) as T
             }

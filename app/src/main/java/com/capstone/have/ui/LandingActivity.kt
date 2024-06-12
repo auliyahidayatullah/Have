@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.have.databinding.ActivityLandingBinding
 import com.capstone.have.ui.login.LoginActivity
+import com.capstone.have.ui.main.MainActivity
 import com.capstone.have.ui.signup.SignUpActivity
 
 class LandingActivity : AppCompatActivity() {
