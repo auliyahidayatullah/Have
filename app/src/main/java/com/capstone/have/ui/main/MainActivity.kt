@@ -1,24 +1,25 @@
-package com.capstone.have.ui
+package com.capstone.have.ui.main
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.have.R
-import com.capstone.have.data.Result
 import com.capstone.have.databinding.ActivityMainBinding
-import com.capstone.have.ui.LandingActivity.Companion.USER_PREFERENCE
+import com.capstone.have.ui.LandingActivity
+import com.capstone.have.ui.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,15 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("MainActivity", "Error setting up NavController", e)
         }
+
+        //        SETUP SAVE SESSION
+        mainViewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, LandingActivity::class.java))
+                finish()
+            } else {
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -41,46 +51,22 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-
-//        viewModel.getSession().observe(this) { user ->
-//            if (!user.isLogin) {
-//                startActivity(Intent(this, LandingActivity::class.java))
-//                finish()
-//            } else {
-//                viewModel.getStories().observe(this) { result ->
-//                    when (result) {
-//                        is Result.Loading -> showLoading(true)
-//                        is Result.Success -> {
-//                            showLoading(false)
-//                            setUserData(result.data)
-//                        }
-//                        is Result.Error -> {
-//                            showLoading(false)
-//                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-//    private fun showLoading(isLoading: Boolean) {
-//        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//    }
-
-    /*private fun logout (){
+    //    SETUP LOGOUT
+    private fun logout (){
         val sharedPreferences = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear()
         editor.apply()
     }
 
+    //    SETUP BACK TO APP LAUNCHER
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
-    }*/
+    }
 
-//    companion object {
-//        const val USER_PREFERENCE = "user_prefs"
-//    }
+    companion object {
+        const val USER_PREFERENCE = "user_prefs"
+    }
 
 }
