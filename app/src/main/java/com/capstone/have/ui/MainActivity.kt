@@ -3,10 +3,12 @@ package com.capstone.have.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.have.R
 import com.capstone.have.data.Result
@@ -26,13 +28,19 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
+        try {
+            val navController = findNavController(R.id.nav_host_fragment_activity_main)
+            navView.setupWithNavController(navController)
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error setting up NavController", e)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_sleep, R.id.navigation_activity, R.id.navigation_calorie
-            )
-        )
-        navView.setupWithNavController(navController)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
 
 //        viewModel.getSession().observe(this) { user ->
 //            if (!user.isLogin) {
@@ -54,13 +62,12 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
 //        }
-    }
 
 //    private fun showLoading(isLoading: Boolean) {
 //        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
 //    }
 
-    private fun logout (){
+    /*private fun logout (){
         val sharedPreferences = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear()
@@ -70,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
-    }
+    }*/
 
 //    companion object {
 //        const val USER_PREFERENCE = "user_prefs"

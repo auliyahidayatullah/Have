@@ -62,4 +62,5 @@
     <string name="desc_landing3">Often sleepy in the morning? We are ready to improve your sleep patterns</string>
     <string name="tv_landing4">Calorie Management</string>
     <string name="desc_landing4">Often not confident? Arrange your diet with us.</string>
+    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
 </resources>
