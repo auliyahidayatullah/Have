@@ -4,6 +4,7 @@ import android.content.Context
 import com.capstone.have.data.preference.UserPreference
 import com.capstone.have.data.preference.dataStore
 import com.capstone.have.data.repository.ActivityRepository
+import com.capstone.have.data.repository.CalorieRepository
 import com.capstone.have.data.repository.UserRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -20,5 +21,9 @@ object Injection {
         val user = runBlocking { pref.getSession().first() }
         val apiService = ApiConfig.getApiService(user.token)
         return ActivityRepository.getInstance(apiService)
+    }
+
+    fun provideCalorieRepository(apiService: ApiService): CalorieRepository {
+        return CalorieRepository(apiService)
     }
 }

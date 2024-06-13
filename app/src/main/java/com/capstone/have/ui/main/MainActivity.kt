@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
             } else {
             }
         }
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -52,11 +54,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //    SETUP LOGOUT
-    private fun logout (){
+    fun logout (){
         val sharedPreferences = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear()
         editor.apply()
+
+        startActivity(Intent(this, LandingActivity::class.java))
+        finish()
     }
 
     //    SETUP BACK TO APP LAUNCHER

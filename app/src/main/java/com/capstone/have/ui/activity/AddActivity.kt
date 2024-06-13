@@ -38,7 +38,7 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
                 showLoading(false)
                 Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             } else {
-                showLoading(true)
+                showLoading(false)
                 showPopupDialog()
             }
         }
@@ -46,14 +46,14 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
 
     //    SETUP ONCLICK BTN ADD
     override fun onClick(v: View?) {
-        if (v?.id == R.id.btn_signUp) {
+        if (v?.id == R.id.addButton) {
             val activity = binding.edAddActivity.text.toString().trim()
             val time = binding.edTime.text.toString().trim()
 
             if (activity.isNotBlank() && time.isNotBlank()) {
                 addActivityViewModel.addActivity(activity, time)
             } else {
-                Toast.makeText(this, "Activity is must filled!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Activity and Time must be filled!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -79,9 +79,10 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
     private fun showPopupDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Activity Added Successfully!")
-        builder.setMessage("Your activity was successfully added.\\nDo you want to add another activity?\\n(We recommend you to add at least 3 activities.)")
+        builder.setMessage("Your activity was successfully added.\nDo you want to add another activity?\n(We recommend you to add at least 3 activities.)")
         builder.setPositiveButton("Yes") { _, _ ->
             startActivity(Intent(this, AddActivity::class.java))
+            finish()
         }
         builder.setNegativeButton("No") { _, _ ->
             startActivity(Intent(this, MainActivity::class.java))

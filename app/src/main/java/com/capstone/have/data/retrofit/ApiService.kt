@@ -2,11 +2,14 @@ package com.capstone.have.data.retrofit
 
 import com.capstone.have.data.response.AddActivityResponse
 import com.capstone.have.data.response.ExerciseResponse
+import com.capstone.have.data.response.FoodRecommendationsItem
+import com.capstone.have.data.response.FoodsRecommendationResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiService {
@@ -37,6 +40,8 @@ interface ApiService {
     suspend fun getExercise(
     ): ExerciseResponse
 
-
-
+    @GET("recommendations/food")
+    suspend fun getFoodRecommendation(
+        @Header("Authorization") token: String,
+    ): FoodsRecommendationResponse
 }
