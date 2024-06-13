@@ -56,17 +56,14 @@ class CalorieFragment : Fragment() {
                     Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
                 }
 
-                // Di dalam method onResults() pada imageClassifierHelper
                 override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
                     results?.let {
                         if (it.isNotEmpty()) {
-                            val topResult = it[0].categories[0] // Mengambil hasil klasifikasi pertama
-                            val predictedLabel = topResult.label.trim().lowercase() // Ambil label hasil klasifikasi
+                            val topResult = it[0].categories[0]
+                            val predictedLabel = topResult.label.trim().lowercase()
 
-                            // Tambahkan logging untuk memastikan nilai dari predictedLabel
                             Log.d("CalorieFragment", "Predicted food: $predictedLabel")
 
-                            // Ambil indeks dari classIndices menggunakan label hasil klasifikasi
                             val predictedIndex = classIndices[predictedLabel]
 
                             predictedIndex?.let { index ->
@@ -193,7 +190,7 @@ class CalorieFragment : Fragment() {
     }
 
     private fun handleImageUri(imageUri: Uri) {
-        currentImageUri = imageUri  // Simpan URI gambar saat ini di sini
+        currentImageUri = imageUri
         imageClassifierHelper.classifyStaticImage(imageUri)
     }
 
@@ -205,7 +202,6 @@ class CalorieFragment : Fragment() {
                 val jsonString = jsonInputStream.bufferedReader().use { it.readText() }
                 val jsonObject = JSONObject(jsonString)
 
-                // Iterate over JSON object and map key-value pairs
                 val iterator = jsonObject.keys()
                 while (iterator.hasNext()) {
                     val key = iterator.next()
@@ -223,10 +219,6 @@ class CalorieFragment : Fragment() {
 
         return classIndicesMap
     }
-
-
-
-
 
     companion object {
         private val caloriesDict = mapOf(
