@@ -1,1 +1,8 @@
-{"egg": 0, "orange juice": 1, "pancake": 2, "rice": 3, "sweet tea": 4, "waffle": 5}
+{
+  "egg": 0,
+  "orange juice": 1,
+  "pancake": 2,
+  "rice": 3,
+  "sweet tea": 4,
+  "waffle": 5
+}

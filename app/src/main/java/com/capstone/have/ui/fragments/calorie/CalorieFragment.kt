@@ -14,13 +14,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.capstone.have.databinding.FragmentCalorieBinding
+import androidx.fragment.app.Fragment
 import com.capstone.have.ImageClassifierHelper
+import com.capstone.have.databinding.FragmentCalorieBinding
+import org.json.JSONException
+import org.json.JSONObject
 import org.tensorflow.lite.task.vision.classifier.Classifications
-import java.util.Locale
+import java.io.IOException
 
 class CalorieFragment : Fragment() {
 
@@ -28,6 +30,11 @@ class CalorieFragment : Fragment() {
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var fileLauncher: ActivityResultLauncher<Intent>
+
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private var currentImageUri: Uri? = null
+
+    private lateinit var classIndices: Map<String, String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +46,64 @@ class CalorieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        classIndices = loadClassIndices()
+
+        imageClassifierHelper = ImageClassifierHelper(
+            context = requireContext(),
+            classifierListener = object : ImageClassifierHelper.ClassifierListener {
+                override fun onError(error: String) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+                }
+
+                // Di dalam method onResults() pada imageClassifierHelper
+                override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
+                    results?.let {
+                        if (it.isNotEmpty()) {
+                            val topResult = it[0].categories[0] // Mengambil hasil klasifikasi pertama
+                            val predictedLabel = topResult.label.trim().lowercase() // Ambil label hasil klasifikasi
+
+                            // Tambahkan logging untuk memastikan nilai dari predictedLabel
+                            Log.d("CalorieFragment", "Predicted food: $predictedLabel")
+
+                            // Ambil indeks dari classIndices menggunakan label hasil klasifikasi
+                            val predictedIndex = classIndices[predictedLabel]
+
+                            predictedIndex?.let { index ->
+                                val predictedFood = index.toIntOrNull()?.let { classIndices.entries.firstOrNull { it.value == index }?.key }
+
+                                predictedFood?.let {
+                                    val calories = caloriesDict[it]
+                                    if (calories != null) {
+                                        currentImageUri?.let { uri ->
+                                            val intent = Intent(requireContext(), AddFoodActivity::class.java).apply {
+                                                putExtra(AddFoodActivity.EXTRA_FOOD_NAME, it)
+                                                putExtra(AddFoodActivity.EXTRA_CALORIES, calories)
+                                                putExtra(AddFoodActivity.EXTRA_IMAGE_URI, uri.toString())
+                                            }
+                                            startActivity(intent)
+                                        }
+                                    } else {
+                                        Toast.makeText(requireContext(), "Informasi kalori untuk $it tidak tersedia", Toast.LENGTH_SHORT).show()
+                                        Log.e("CalorieFragment", "Informasi kalori untuk $it tidak tersedia")
+                                    }
+                                } ?: run {
+                                    Toast.makeText(requireContext(), "Invalid prediction index for $predictedLabel", Toast.LENGTH_SHORT).show()
+                                    Log.e("CalorieFragment", "Invalid prediction index for $predictedLabel")
+                                }
+                            } ?: run {
+                                Toast.makeText(requireContext(), "Invalid prediction label: $predictedLabel", Toast.LENGTH_SHORT).show()
+                                Log.e("CalorieFragment", "Invalid prediction label: $predictedLabel")
+                            }
+                        } else {
+                            Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+                        }
+                    } ?: run {
+                        Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        )
 
         binding.extendedFab.setOnClickListener {
             showPictureDialog()
@@ -127,52 +192,50 @@ class CalorieFragment : Fragment() {
         fileLauncher.launch(fileIntent)
     }
 
-    private fun handleImageUri(uri: Uri) {
-        val classifierHelper = ImageClassifierHelper(
-            context = requireContext(),
-            classifierListener = object : ImageClassifierHelper.ClassifierListener {
-                override fun onError(error: String) {
-                    showToast(error)
-                }
+    private fun handleImageUri(imageUri: Uri) {
+        currentImageUri = imageUri  // Simpan URI gambar saat ini di sini
+        imageClassifierHelper.classifyStaticImage(imageUri)
+    }
 
-                override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
-                    results?.let {
-                        if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
-                            val result = it[0].categories[0]
-                            val displayResult = "${result.label}: ${result.score}"
-                            Log.d("CalorieFragment", "Raw classification result: $displayResult")
-                            val calories = extractCaloriesFromResult(result.label, result.score)
-                            Log.d("CalorieFragment", "Calories extracted: $calories")
-                            moveToNextActivity(uri, calories)
-                        } else {
-                            showToast("No classification result available.")
-                        }
-                    } ?: showToast("No classification result available.")
+    private fun loadClassIndices(): Map<String, String> {
+        val classIndicesMap = mutableMapOf<String, String>()
+
+        try {
+            requireContext().assets.open("class_indices.json").use { jsonInputStream ->
+                val jsonString = jsonInputStream.bufferedReader().use { it.readText() }
+                val jsonObject = JSONObject(jsonString)
+
+                // Iterate over JSON object and map key-value pairs
+                val iterator = jsonObject.keys()
+                while (iterator.hasNext()) {
+                    val key = iterator.next()
+                    val value = jsonObject.getString(key)
+                    classIndicesMap[key] = value
                 }
             }
+        } catch (e: IOException) {
+            Toast.makeText(requireContext(), "Failed to load class indices", Toast.LENGTH_SHORT).show()
+            Log.e("CalorieFragment", "Error loading class indices", e)
+        } catch (e: JSONException) {
+            Toast.makeText(requireContext(), "Failed to parse class indices JSON", Toast.LENGTH_SHORT).show()
+            Log.e("CalorieFragment", "Error parsing class indices JSON", e)
+        }
+
+        return classIndicesMap
+    }
+
+
+
+
+
+    companion object {
+        private val caloriesDict = mapOf(
+            "egg" to "92 kalori",
+            "orange juice" to "45 kalori",
+            "pancake" to "277 kalori",
+            "rice" to "130 kalori",
+            "sweet tea" to "260 kalori",
+            "waffle" to "291 kalori"
         )
-        classifierHelper.classifyStaticImage(uri)
-    }
-
-    private fun moveToNextActivity(imageUri: Uri, calories: String) {
-        val intent = Intent(requireContext(), AddFoodActivity::class.java)
-        intent.putExtra("imageUri", imageUri.toString())
-        intent.putExtra("calories", calories)
-        startActivity(intent)
-    }
-
-    private fun extractCaloriesFromResult(label: String, score: Float): String {
-        // Log the result for debugging
-        Log.d("CalorieFragment", "Classification result: $label")
-
-        // Format the score to a string with 2 decimal places
-        val formattedScore = String.format(Locale.getDefault(), "%.2f", score)
-
-
-        return formattedScore
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }
