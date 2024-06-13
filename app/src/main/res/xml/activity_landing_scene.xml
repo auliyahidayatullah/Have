@@ -245,7 +245,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="60dp"
-            motion:layout_constraintVertical_bias="1.0"
+            motion:layout_constraintVertical_bias="0.85"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent" >
             <CustomAttribute

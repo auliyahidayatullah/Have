@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.capstone.have.data.preference.UserModel
 import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.response.RegisterResponse
 import kotlinx.coroutines.launch
@@ -21,6 +22,12 @@ class SignUpViewModel (private val repository: UserRepository) : ViewModel() {
             } catch (e: Exception) {
                 _registerResult.postValue(RegisterResponse(status = "failed", message = e.message))
             }
+        }
+    }
+
+    fun saveSession(user: UserModel) {
+        viewModelScope.launch {
+            repository.saveSession(user)
         }
     }
 }

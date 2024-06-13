@@ -13,6 +13,7 @@
         style="@style/CustomTextView"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:layout_marginTop="21dp"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"/>
 
@@ -20,7 +21,7 @@
         android:id="@+id/rvActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:orientation="horizontal"
         android:scrollbars="horizontal"
         tools:listitem="@layout/item_calorie" />

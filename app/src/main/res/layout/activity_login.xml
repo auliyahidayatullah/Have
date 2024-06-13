@@ -36,13 +36,11 @@
     <TextView
         android:id="@+id/tv_username"
         style="@style/CustomTextView.Textfield"
-        android:alpha="0"
         android:text="@string/username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_header2"
-        app:layout_constraintVertical_bias="0.060000002"
-        tools:alpha="100" />
+        app:layout_constraintVertical_bias="0.060000002"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_username"
@@ -50,11 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_username"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/tv_username">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_signin_username"
@@ -68,12 +64,10 @@
     <TextView
         android:id="@+id/passwordTextView"
         android:layout_marginTop="30dp"
-        android:alpha="0"
         android:text="@string/password"
         style="@style/CustomTextView.Textfield"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_username"
-        tools:alpha="100" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_username" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_password"
@@ -81,12 +75,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:alpha="0"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
-        tools:alpha="100" >
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView">
 
         <EditText
             android:id="@+id/ed_signin_password"

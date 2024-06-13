@@ -1,10 +1,12 @@
 package com.capstone.have.data.retrofit
 
 import com.capstone.have.data.response.AddActivityResponse
+import com.capstone.have.data.response.ExerciseResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -25,10 +27,16 @@ interface ApiService {
     ): LoginResponse
 
     @FormUrlEncoded
-    @POST("/activity")
+    @POST("activity")
     suspend fun addActivity(
         @Field("name") name: String,
         @Field("duration") duration: String
     ): AddActivityResponse
+
+    @GET("exercise")
+    suspend fun getExercise(
+    ): ExerciseResponse
+
+
 
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_exercise"
+        android:layout_width="154dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="15dp"
+        app:cardElevation="10dp"
+        style="?attr/materialCardViewElevatedStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_exercise"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Media" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/exercise_name"
+                    android:text="Exercise Name"
+                    style="@style/CustomTextView"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/iconCalorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_calorie"
+                    app:layout_constraintTop_toBottomOf="@id/exercise_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/exercise_calorie"
+                    android:text="calories"
+                    style="@style/CustomTextView"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/exercise_name"
+                    app:layout_constraintStart_toEndOf="@id/iconCalorie"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="9.84dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
