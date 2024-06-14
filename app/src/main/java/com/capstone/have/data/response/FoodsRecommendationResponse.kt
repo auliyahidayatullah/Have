@@ -17,7 +17,7 @@ data class FoodsRecommendationResponse(
 data class Data(
 
 	@field:SerializedName("foodRecommendations")
-	val foodRecommendations: List<FoodRecommendationsItem?>? = null
+	val foodRecommendations: List<FoodRecommendationsItem?> = emptyList()
 )
 
 data class FoodRecommendationsItem(

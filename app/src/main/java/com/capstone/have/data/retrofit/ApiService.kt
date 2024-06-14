@@ -50,6 +50,5 @@ interface ApiService {
 
     @GET("recommendations/food")
     suspend fun getFoodRecommendation(
-        @Header("Authorization") token: String,
     ): FoodsRecommendationResponse
 }

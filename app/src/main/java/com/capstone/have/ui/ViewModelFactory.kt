@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.have.data.repository.ActivityRepository
+import com.capstone.have.data.repository.CalorieRepository
 import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.retrofit.Injection
 import com.capstone.have.ui.activity.AddActivityViewModel
@@ -14,14 +15,15 @@ import com.capstone.have.ui.signup.SignUpViewModel
 
 class ViewModelFactory (
     private val userRepository: UserRepository,
-    private val activityRepository: ActivityRepository
+    private val activityRepository: ActivityRepository,
+    private val calorieRepository: CalorieRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(userRepository, activityRepository) as T
+                MainViewModel(userRepository, activityRepository, calorieRepository) as T
             }
             modelClass.isAssignableFrom(SignInViewModel::class.java) -> {
                 SignInViewModel(userRepository) as T
@@ -43,7 +45,8 @@ class ViewModelFactory (
         fun getInstance(context: Context): ViewModelFactory {
             return ViewModelFactory(
                 Injection.provideUserRepository(context),
-                Injection.provideActivityRepository(context)
+                Injection.provideActivityRepository(context),
+                Injection.provideCalorieRepository(context)
             )
         }
     }

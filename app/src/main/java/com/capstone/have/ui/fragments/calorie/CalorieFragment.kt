@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import com.capstone.have.ImageClassifierHelper
 import com.capstone.have.R
 import com.capstone.have.databinding.FragmentCalorieBinding
+import com.capstone.have.databinding.FragmentHomeBinding
 import com.capstone.have.ui.fragments.home.UpcomingActivityFragment
 import org.json.JSONException
 import org.json.JSONObject
@@ -28,7 +29,9 @@ import java.io.IOException
 
 class CalorieFragment : Fragment() {
 
-    private lateinit var binding: FragmentCalorieBinding
+    private var _binding: FragmentCalorieBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var fileLauncher: ActivityResultLauncher<Intent>
@@ -42,16 +45,18 @@ class CalorieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCalorieBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCalorieBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         childFragmentManager.beginTransaction()
             .replace(R.id.food_rec_container, FoodRecomFragment())
             .commit()
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         classIndices = loadClassIndices()
 
@@ -108,6 +113,7 @@ class CalorieFragment : Fragment() {
             }
         )
 
+        binding.extendedFab.visibility = View.VISIBLE
         binding.extendedFab.setOnClickListener {
             showPictureDialog()
         }
