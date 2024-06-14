@@ -1,25 +1,26 @@
 package com.capstone.have.ui.fragments.activity
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.have.data.response.ExerciseRecommendationsItem
+import com.capstone.have.data.Result
+import com.capstone.have.data.response.ActivityData
 import com.capstone.have.databinding.FragmentExerciseRecBinding
 import com.capstone.have.ui.ViewModelFactory
-import com.capstone.have.ui.main.MainViewModel
-import com.capstone.have.data.Result
 
-class ExerciseRecFragment : Fragment() {
+
+class YourActivityFragment : Fragment() {
 
     private var _binding: FragmentExerciseRecBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var activityViewModel: ActivityViewModel
+    private lateinit var userToken: String
 
 
     override fun onCreateView(
@@ -44,25 +45,26 @@ class ExerciseRecFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val factory = ViewModelFactory.getInstance(requireContext())
-        mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
+        activityViewModel = ViewModelProvider(this, factory)[ActivityViewModel::class.java]
 
-        mainViewModel.getListExercise().observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Success -> {
-                    setExerciseData(result.data)
-                }
-                is Result.Error -> {
-                    Toast.makeText(context, "Failed Load Data", Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
+//        activityViewModel.getActivity().observe(viewLifecycleOwner) { result ->
+//            userToken = userModel.token
+//            when (result) {
+//                is Result.Success -> {
+//                    setExerciseData(result.data)
+//                }
+//                is Result.Error -> {
+//                    Toast.makeText(context, "Failed Load Data", Toast.LENGTH_SHORT).show()
+//                }
+//                else -> {}
+//            }
+//        }
 
     }
 
-    private fun setExerciseData(listExercise: List<ExerciseRecommendationsItem>) {
-        val adapter = ExerciseAdapter()
-        adapter.submitList(listExercise)
+    private fun setExerciseData(listActivity: List<ActivityData>) {
+        val adapter = ActivityAdapter()
+        adapter.submitList(listActivity)
         binding.rvExercise.adapter = adapter
     }
 

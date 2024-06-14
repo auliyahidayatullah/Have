@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.activity.ExerciseRecFragment">
 
     <TextView
-        android:id="@+id/header_upcomingActivity"
+        android:id="@+id/header_yourActivity"
         android:layout_width="239dp"
         android:text="@string/exercise_recommendation"
         style="@style/CustomTextView"
@@ -18,11 +17,10 @@
         android:layout_marginEnd="21dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvActivity"
+        android:id="@+id/rv_exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
         android:orientation="horizontal"
-        android:scrollbars="horizontal"
-        tools:listitem="@layout/item_calorie" />
+        tools:listitem="@layout/item_exercise" />
 </FrameLayout>

@@ -17,7 +17,7 @@ import java.util.Calendar
 import java.util.Locale
 
 class AddActivity : AppCompatActivity(), View.OnClickListener {
-    private val addActivityViewModel by viewModels<ActivityViewModel> {
+    private val addActivityViewModel by viewModels<AddActivityViewModel> {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityAddBinding
@@ -67,7 +67,7 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
         val timePickerDialog = TimePickerDialog(this,
             { _: TimePicker, selectedHour: Int, selectedMinute: Int ->
                 val selectedTime =
-                    String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute)
+                    String.format(Locale.getDefault(), "%d.%02d", selectedHour, selectedMinute)
                 binding.edTime.setText(selectedTime)
             }, hour, minute, true
         )

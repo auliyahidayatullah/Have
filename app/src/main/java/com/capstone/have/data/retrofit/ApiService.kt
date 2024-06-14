@@ -2,6 +2,7 @@ package com.capstone.have.data.retrofit
 
 import com.capstone.have.data.response.ActivityResponse
 import com.capstone.have.data.response.AddActivityResponse
+import com.capstone.have.data.response.ExerciseRecommendationsItem
 import com.capstone.have.data.response.ExerciseResponse
 import com.capstone.have.data.response.FoodRecommendationsItem
 import com.capstone.have.data.response.FoodsRecommendationResponse
@@ -38,7 +39,7 @@ interface ApiService {
         @Field("duration") duration: String
     ): AddActivityResponse
 
-    @GET("exercise")
+    @GET("recommendations/exercise")
     suspend fun getExercise(
     ): ExerciseResponse
 

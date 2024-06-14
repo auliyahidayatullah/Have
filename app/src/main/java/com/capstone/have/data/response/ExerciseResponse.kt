@@ -14,6 +14,12 @@ data class ExerciseResponse(
 	val status: String? = null
 )
 
+data class ExerciseData(
+
+	@field:SerializedName("exerciseRecommendations")
+	val exerciseRecommendations: List<ExerciseRecommendationsItem?> = emptyList()
+)
+
 data class ExerciseRecommendationsItem(
 
 	@field:SerializedName("image_url")
@@ -27,10 +33,4 @@ data class ExerciseRecommendationsItem(
 
 	@field:SerializedName("calories")
 	val calories: String? = null
-)
-
-data class ExerciseData(
-
-	@field:SerializedName("exerciseRecommendations")
-	val exerciseRecommendations: List<ExerciseRecommendationsItem?> = emptyList()
 )
