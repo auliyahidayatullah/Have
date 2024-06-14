@@ -30,9 +30,9 @@ class FoodRecomFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FoodRecomAdapter()
-        binding.rvActivity.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvActivity.adapter = adapter
+//        val adapter = FoodRecomAdapter()
+//        binding.rvActivity.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        binding.rvActivity.adapter = adapter
 
         val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItYnQyVm1qRGZiczNvd2lEbyIsImlhdCI6MTcxODE4Mzg3Nn0.A3DmZEXevRUbXTHsIksJ3dd_2iGysc3LOFbxtB_vakc"
 
@@ -41,7 +41,7 @@ class FoodRecomFragment : Fragment() {
         val repository = Injection.provideCalorieRepository(apiService)
 
         viewModel.foodRecommendations.observe(viewLifecycleOwner) { foods ->
-            adapter.submitList(foods)
+//            adapter.submitList(foods)
         }
 
         viewModel.getFoodRecommendations(token)

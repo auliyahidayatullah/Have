@@ -1,6 +1,7 @@
 package com.capstone.have.data.repository
 
 import com.capstone.have.data.response.AddActivityResponse
+import com.capstone.have.data.response.ExerciseRecommendationsItem
 import com.capstone.have.data.response.ExerciseResponse
 import com.capstone.have.data.retrofit.ApiService
 import kotlin.time.Duration

@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/header_upcomingActivity"
+        android:id="@+id/header_yourActivity"
         style="@style/CustomTextView"
         android:layout_marginStart="21dp"
         android:layout_marginTop="21dp"
@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_upcomingActivity"
+        app:layout_constraintTop_toBottomOf="@id/header_yourActivity"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout

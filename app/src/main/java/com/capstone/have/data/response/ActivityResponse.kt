@@ -17,7 +17,7 @@ data class ActivityResponse(
 data class ActivityData(
 
 	@field:SerializedName("duration")
-	val duration: Int? = null,
+	val duration: String? = null,
 
 	@field:SerializedName("activityId")
 	val activityId: Int? = null,

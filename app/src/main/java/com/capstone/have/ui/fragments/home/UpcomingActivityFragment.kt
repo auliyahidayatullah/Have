@@ -6,53 +6,62 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.capstone.have.R
 import com.capstone.have.data.response.ActivityData
 import com.capstone.have.databinding.FragmentUpcomingActivityBinding
-import com.capstone.have.ui.activity.ActivityViewModel
+import com.capstone.have.ui.ViewModelFactory
+import com.capstone.have.ui.activity.AddActivityViewModel
+import com.capstone.have.ui.fragments.activity.ActivityViewModel
+import kotlinx.coroutines.launch
 
 class UpcomingActivityFragment : Fragment() {
-    private var _binding : FragmentUpcomingActivityBinding? = null
+    private var _binding: FragmentUpcomingActivityBinding? = null
     private val binding get() = _binding!!
     private lateinit var userToken: String
-    private val activityViewModel by viewModels<ActivityViewModel>()
+    private lateinit var activityViewModel: ActivityViewModel
     private var activityId: String = ARG_ID
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpcomingActivityBinding.inflate(inflater, container, false)
-        val view = binding.root
-        userToken = activityViewModel.getUserToken().toString()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let {
-            activityId = it.getString(ARG_ID).orEmpty()
-        }
 
-        val token = userToken
+        val factory = ViewModelFactory.getInstance(requireContext())
+        activityViewModel = ViewModelProvider(this, factory)[ActivityViewModel::class.java]
 
-//        GET ACTIVITY
-        activityViewModel.getActivity(activityId, token)
+        viewLifecycleOwner.lifecycleScope.launch {
+            activityViewModel.getUserToken().collect { userModel ->
+                userToken = userModel.token
 
-//        SETUP DATA
-        activityViewModel.activity.observe(viewLifecycleOwner) { response ->
-            response?.data?.let { updateUI(it) }
+                arguments?.let {
+                    activityId = it.getString(ARG_ID).orEmpty()
+                }
+
+                val token = userToken
+                activityViewModel.getActivity(activityId, token)
+
+                activityViewModel.activity.observe(viewLifecycleOwner) { response ->
+                    response?.data?.let { updateUI(it) }
+                }
+            }
         }
     }
 
-//    SETUP UI
     private fun updateUI(data: ActivityData) {
+        binding.iconActivity.setImageResource(R.drawable.ic_activity)
+        binding.iconTime.setImageResource(R.drawable.ic_time)
         binding.tvActivity.text = data.name
         binding.tvActivityTime.text = data.duration.toString()
     }
 
-//    ANTI MEMORY LEAKS
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -27,10 +27,9 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.edSigninPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email dan password harus diisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Email and password are must filled!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
             viewModel.login(email, password)
         }
 
