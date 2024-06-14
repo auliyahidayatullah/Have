@@ -37,13 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //        SETUP SAVE SESSION
-        mainViewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, LandingActivity::class.java))
-                finish()
-            } else {
-            }
-        }
+
 
 
     }
@@ -53,25 +47,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    //    SETUP LOGOUT
-    fun logout (){
-        val sharedPreferences = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-
-        startActivity(Intent(this, LandingActivity::class.java))
-        finish()
-    }
-
     //    SETUP BACK TO APP LAUNCHER
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
-    }
-
-    companion object {
-        const val USER_PREFERENCE = "user_prefs"
     }
 
 }

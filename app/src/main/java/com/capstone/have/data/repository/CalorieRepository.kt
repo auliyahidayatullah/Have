@@ -9,4 +9,8 @@ class CalorieRepository(private val apiService: ApiService) {
         val response = apiService.getFoodRecommendation("Bearer $token")
         return response.data?.foodRecommendations ?: emptyList()
     }
+
+    companion object {
+        fun getInstance(apiService: ApiService) = CalorieRepository(apiService)
+    }
 }

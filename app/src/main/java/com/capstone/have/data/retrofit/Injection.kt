@@ -23,7 +23,10 @@ object Injection {
         return ActivityRepository.getInstance(apiService)
     }
 
-    fun provideCalorieRepository(apiService: ApiService): CalorieRepository {
-        return CalorieRepository(apiService)
+    fun provideCalorieRepository(context: Context): CalorieRepository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val user = runBlocking { pref.getSession().first() }
+        val apiService = ApiConfig.getApiService(user.token)
+        return CalorieRepository.getInstance(apiService)
     }
 }
