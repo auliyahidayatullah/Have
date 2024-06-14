@@ -1,5 +1,6 @@
 package com.capstone.have.data.retrofit
 
+import com.capstone.have.data.response.ActivityResponse
 import com.capstone.have.data.response.AddActivityResponse
 import com.capstone.have.data.response.ExerciseResponse
 import com.capstone.have.data.response.FoodRecommendationsItem
@@ -11,6 +12,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @FormUrlEncoded
@@ -39,6 +41,11 @@ interface ApiService {
     @GET("exercise")
     suspend fun getExercise(
     ): ExerciseResponse
+
+    @GET("activity/{id}")
+    suspend fun getActivity(
+        @Path("id") activityId: String
+    ): ActivityResponse
 
     @GET("recommendations/food")
     suspend fun getFoodRecommendation(

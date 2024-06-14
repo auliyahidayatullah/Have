@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.have.data.repository.ActivityRepository
 import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.retrofit.Injection
-import com.capstone.have.ui.activity.AddActivityViewModel
+import com.capstone.have.ui.activity.ActivityViewModel
 import com.capstone.have.ui.login.SignInViewModel
 import com.capstone.have.ui.main.MainViewModel
 import com.capstone.have.ui.signup.SignUpViewModel
@@ -27,8 +27,8 @@ class ViewModelFactory (private val userRepository: UserRepository, private val 
                 SignUpViewModel(userRepository) as T
             }
 
-            modelClass.isAssignableFrom(AddActivityViewModel::class.java) -> {
-                AddActivityViewModel(activityRepository) as T
+            modelClass.isAssignableFrom(ActivityViewModel::class.java) -> {
+                ActivityViewModel(activityRepository, userRepository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

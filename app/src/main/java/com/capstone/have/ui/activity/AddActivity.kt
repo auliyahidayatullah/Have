@@ -17,7 +17,7 @@ import java.util.Calendar
 import java.util.Locale
 
 class AddActivity : AppCompatActivity(), View.OnClickListener {
-    private val addActivityViewModel by viewModels<AddActivityViewModel> {
+    private val addActivityViewModel by viewModels<ActivityViewModel> {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityAddBinding
@@ -38,7 +38,7 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
                 showLoading(false)
                 Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             } else {
-                showLoading(false)
+                showLoading(true)
                 showPopupDialog()
             }
         }
