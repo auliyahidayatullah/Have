@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.have.data.repository.ActivityRepository
-import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.response.AddActivityResponse
 import kotlinx.coroutines.launch
 

@@ -2,16 +2,14 @@ package com.capstone.have.data.retrofit
 
 import com.capstone.have.data.response.ActivityResponse
 import com.capstone.have.data.response.AddActivityResponse
-import com.capstone.have.data.response.ExerciseRecommendationsItem
 import com.capstone.have.data.response.ExerciseResponse
-import com.capstone.have.data.response.FoodRecommendationsItem
 import com.capstone.have.data.response.FoodsRecommendationResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
+import com.capstone.have.data.response.AddSleepResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -51,4 +49,12 @@ interface ApiService {
     @GET("recommendations/food")
     suspend fun getFoodRecommendation(
     ): FoodsRecommendationResponse
+
+
+    @FormUrlEncoded
+    @POST("sleeps")
+    suspend fun addSleep(
+        @Field("bedtime") bedtime: String,
+        @Field("wakeuptime") wakeuptime: String
+    ): AddSleepResponse
 }
