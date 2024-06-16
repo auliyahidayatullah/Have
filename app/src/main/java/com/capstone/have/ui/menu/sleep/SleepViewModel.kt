@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.sleep
+package com.capstone.have.ui.menu.sleep
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

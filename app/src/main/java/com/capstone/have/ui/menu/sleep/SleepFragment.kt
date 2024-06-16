@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.sleep
+package com.capstone.have.ui.menu.sleep
 
 import android.os.Bundle
 import android.view.LayoutInflater

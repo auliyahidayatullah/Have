@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.calorie
+package com.capstone.have.ui.menu.calorie
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.activity
+package com.capstone.have.ui.menu.activity
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.have.R
-import com.capstone.have.data.response.ActivityData
+import com.capstone.have.data.response.AllactivityItem
 import com.capstone.have.databinding.ItemActivityBinding
 
-class ActivityAdapter : ListAdapter<ActivityData, ActivityAdapter.MyViewHolder>(
+class ActivityAdapter : ListAdapter<AllactivityItem, ActivityAdapter.MyViewHolder>(
     DIFF_CALLBACK
 ) {
 
@@ -25,7 +25,7 @@ class ActivityAdapter : ListAdapter<ActivityData, ActivityAdapter.MyViewHolder>(
 
     class MyViewHolder(private val binding: ItemActivityBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ActivityData) {
+        fun bind(item: AllactivityItem) {
             // Bind data to views using ViewBinding
             binding.iconActivity.setImageResource(R.drawable.ic_activity)
             binding.iconActivity.setImageResource(R.drawable.ic_time)
@@ -36,11 +36,11 @@ class ActivityAdapter : ListAdapter<ActivityData, ActivityAdapter.MyViewHolder>(
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ActivityData>() {
-            override fun areItemsTheSame(oldItem: ActivityData, newItem: ActivityData): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AllactivityItem>() {
+            override fun areItemsTheSame(oldItem: AllactivityItem, newItem: AllactivityItem): Boolean {
                 return oldItem == newItem
             }
-            override fun areContentsTheSame(oldItem: ActivityData, newItem: ActivityData): Boolean {
+            override fun areContentsTheSame(oldItem: AllactivityItem, newItem: AllactivityItem): Boolean {
                 return oldItem == newItem
             }
         }

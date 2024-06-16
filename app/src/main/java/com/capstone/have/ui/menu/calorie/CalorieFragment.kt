@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.calorie
+package com.capstone.have.ui.menu.calorie
 
 import android.Manifest
 import android.app.Activity
@@ -20,8 +20,6 @@ import androidx.fragment.app.Fragment
 import com.capstone.have.ImageClassifierHelper
 import com.capstone.have.R
 import com.capstone.have.databinding.FragmentCalorieBinding
-import com.capstone.have.databinding.FragmentHomeBinding
-import com.capstone.have.ui.fragments.home.UpcomingActivityFragment
 import org.json.JSONException
 import org.json.JSONObject
 import org.tensorflow.lite.task.vision.classifier.Classifications

@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.home
+package com.capstone.have.ui.menu.home
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import com.capstone.have.R
 import com.capstone.have.databinding.FragmentHomeBinding
 import com.capstone.have.ui.LandingActivity
 import com.capstone.have.ui.ViewModelFactory
-import com.capstone.have.ui.fragments.activity.ExerciseRecFragment
+import com.capstone.have.ui.menu.activity.ExerciseRecFragment
 import com.capstone.have.ui.main.MainViewModel
 
 class HomeFragment : Fragment() {

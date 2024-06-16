@@ -1,5 +1,6 @@
-package com.capstone.have.ui.fragments.calorie
+package com.capstone.have.ui.menu.calorie
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +16,9 @@ class AddFoodActivity : AppCompatActivity() {
         binding = ActivityAddFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val imageUriString: String? = intent.getStringExtra(EXTRA_IMAGE_URI)
-        imageUriString?.let {
-            val imageUri = Uri.parse(it)
-            binding.imageView.setImageURI(imageUri)
+        val imageUri = Uri.parse(intent.getStringExtra(EXTRA_IMAGE_URI))
+        imageUri?.let {
+            binding.imageView.setImageURI(it)
         } ?: run {
             binding.imageView.setImageResource(R.drawable.ic_placeholder)
         }
@@ -34,6 +34,7 @@ class AddFoodActivity : AppCompatActivity() {
         }
 
         binding.buttonBack.setOnClickListener {
+            startActivity(Intent(this, CalorieFragment::class.java))
             finish()
         }
     }

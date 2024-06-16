@@ -2,10 +2,10 @@ package com.capstone.have.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ActivityResponse(
+data class UpcomingActivityResponse(
 
 	@field:SerializedName("data")
-	val data: ActivityData? = null,
+	val data: UpcomingActivityData? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -14,20 +14,14 @@ data class ActivityResponse(
 	val status: String? = null
 )
 
-data class AllactivityItem(
+data class UpcomingActivityData(
 
 	@field:SerializedName("duration")
-	val duration: String? = null,
+	val duration: Int? = null,
 
 	@field:SerializedName("activityId")
 	val activityId: Int? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null
-)
-
-data class ActivityData(
-
-	@field:SerializedName("allactivity")
-	val allactivity: List<AllactivityItem?> = emptyList()
 )

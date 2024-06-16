@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.capstone.have.ui.fragments.home.HomeFragment"
+        android:name="com.capstone.have.ui.menu.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_sleep"
-        android:name="com.capstone.have.ui.fragments.sleep.SleepFragment"
+        android:name="com.capstone.have.ui.menu.sleep.SleepFragment"
         android:label="@string/title_sleep"
         tools:layout="@layout/fragment_sleep" />
 
     <fragment
         android:id="@+id/navigation_activity"
-        android:name="com.capstone.have.ui.fragments.activity.ActivityFragment"
+        android:name="com.capstone.have.ui.menu.activity.ActivityFragment"
         android:label="@string/title_activity"
         tools:layout="@layout/fragment_activity" />
 
     <fragment
         android:id="@+id/navigation_calorie"
-        android:name="com.capstone.have.ui.fragments.calorie.CalorieFragment"
+        android:name="com.capstone.have.ui.menu.calorie.CalorieFragment"
         android:label="@string/title_calorie"
         tools:layout="@layout/fragment_calorie" />
 </navigation>
