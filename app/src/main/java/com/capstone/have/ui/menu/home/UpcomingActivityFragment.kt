@@ -1,19 +1,17 @@
-package com.capstone.have.ui.fragments.home
+package com.capstone.have.ui.menu.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.capstone.have.R
-import com.capstone.have.data.response.ActivityData
+import com.capstone.have.data.response.UpcomingActivityData
 import com.capstone.have.databinding.FragmentUpcomingActivityBinding
 import com.capstone.have.ui.ViewModelFactory
-import com.capstone.have.ui.activity.AddActivityViewModel
-import com.capstone.have.ui.fragments.activity.ActivityViewModel
+import com.capstone.have.ui.menu.activity.ActivityViewModel
 import kotlinx.coroutines.launch
 
 class UpcomingActivityFragment : Fragment() {
@@ -46,7 +44,7 @@ class UpcomingActivityFragment : Fragment() {
                 }
 
                 val token = userToken
-                activityViewModel.getActivity(activityId, token)
+                activityViewModel.getUpcomingActivity(activityId, token)
 
                 activityViewModel.activity.observe(viewLifecycleOwner) { response ->
                     response?.data?.let { updateUI(it) }
@@ -55,7 +53,7 @@ class UpcomingActivityFragment : Fragment() {
         }
     }
 
-    private fun updateUI(data: ActivityData) {
+    private fun updateUI(data: UpcomingActivityData) {
         binding.iconActivity.setImageResource(R.drawable.ic_activity)
         binding.iconTime.setImageResource(R.drawable.ic_time)
         binding.tvActivity.text = data.name

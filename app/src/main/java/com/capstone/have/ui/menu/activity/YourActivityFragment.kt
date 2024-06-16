@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.activity
+package com.capstone.have.ui.menu.activity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.have.data.Result
-import com.capstone.have.data.response.ActivityData
+import com.capstone.have.data.response.AllactivityItem
 import com.capstone.have.databinding.FragmentExerciseRecBinding
 import com.capstone.have.ui.ViewModelFactory
 
@@ -20,8 +20,6 @@ class YourActivityFragment : Fragment() {
     private var _binding: FragmentExerciseRecBinding? = null
     private val binding get() = _binding!!
     private lateinit var activityViewModel: ActivityViewModel
-    private lateinit var userToken: String
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,11 +28,9 @@ class YourActivityFragment : Fragment() {
         _binding = FragmentExerciseRecBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Mengatur LinearLayoutManager dengan orientasi horizontal
+//        SET RV HORIZONTAL
         val layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvExercise.layoutManager = layoutManager
-
-        // Mengatur DividerItemDecoration untuk orientasi horizontal
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
         binding.rvExercise.addItemDecoration(itemDecoration)
 
@@ -47,22 +43,21 @@ class YourActivityFragment : Fragment() {
         val factory = ViewModelFactory.getInstance(requireContext())
         activityViewModel = ViewModelProvider(this, factory)[ActivityViewModel::class.java]
 
-//        activityViewModel.getActivity().observe(viewLifecycleOwner) { result ->
-//            userToken = userModel.token
-//            when (result) {
-//                is Result.Success -> {
-//                    setExerciseData(result.data)
-//                }
-//                is Result.Error -> {
-//                    Toast.makeText(context, "Failed Load Data", Toast.LENGTH_SHORT).show()
-//                }
-//                else -> {}
-//            }
-//        }
+        activityViewModel.getYourActivity().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    setActivityData(result.data)
+                }
+                is Result.Error -> {
+                    Toast.makeText(context, "Failed Load Data", Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
 
     }
 
-    private fun setExerciseData(listActivity: List<ActivityData>) {
+    private fun setActivityData(listActivity: List<AllactivityItem>) {
         val adapter = ActivityAdapter()
         adapter.submitList(listActivity)
         binding.rvExercise.adapter = adapter
@@ -72,5 +67,4 @@ class YourActivityFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

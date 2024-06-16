@@ -1,4 +1,4 @@
-package com.capstone.have.ui.fragments.activity
+package com.capstone.have.ui.menu.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater

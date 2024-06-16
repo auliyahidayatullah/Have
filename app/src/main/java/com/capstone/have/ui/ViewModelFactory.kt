@@ -9,8 +9,8 @@ import com.capstone.have.data.repository.SleepRepository
 import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.retrofit.Injection
 import com.capstone.have.ui.activity.AddActivityViewModel
-import com.capstone.have.ui.fragments.activity.ActivityViewModel
-import com.capstone.have.ui.fragments.sleep.SleepViewModel
+import com.capstone.have.ui.menu.activity.ActivityViewModel
+import com.capstone.have.ui.menu.sleep.SleepViewModel
 import com.capstone.have.ui.login.SignInViewModel
 import com.capstone.have.ui.main.MainViewModel
 import com.capstone.have.ui.signup.SignUpViewModel
@@ -38,7 +38,7 @@ class ViewModelFactory (
                 AddActivityViewModel(activityRepository) as T
             }
             modelClass.isAssignableFrom(ActivityViewModel::class.java) -> {
-                ActivityViewModel(userRepository) as T
+                ActivityViewModel(userRepository, activityRepository) as T
             }
             modelClass.isAssignableFrom(SleepViewModel::class.java) -> {
                 SleepViewModel(sleepRepository) as T

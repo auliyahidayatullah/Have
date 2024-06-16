@@ -5,19 +5,23 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.common.ops.CastOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
+import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 import java.io.IOException
 
 class ImageClassifierHelper(
-    var threshold: Float = 0.1f,
-    var maxResults: Int = 1,
-    val modelName: String = "foods_model_with_metadata.tflite",
+    private var threshold: Float = 0.1f,
+    private var maxResults: Int = 1,
+    private val modelName: String = "foods_model_with_metadata.tflite",
     val context: Context,
     val classifierListener: ClassifierListener?
 ) {
@@ -33,15 +37,16 @@ class ImageClassifierHelper(
             .setScoreThreshold(threshold)
             .setMaxResults(maxResults)
 
+        val baseOptionsBuilder = BaseOptions.builder()
+            .setNumThreads(4)
+        optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
+
         try {
             imageClassifier = ImageClassifier.createFromFileAndOptions(
                 context,
                 modelName,
                 optionsBuilder.build()
             )
-        } catch (e: IOException) {
-            classifierListener?.onError("Failed to load model: ${e.message}")
-            Log.e(TAG, "Model loading error: ${e.message}", e)
         } catch (e: IllegalStateException) {
             classifierListener?.onError("Image classifier initialization failed: ${e.message}")
             Log.e(TAG, "Initialization error: ${e.message}", e)
@@ -61,8 +66,10 @@ class ImageClassifierHelper(
 
             val imageProcessor = ImageProcessor.Builder()
                 .add(ResizeOp(128, 128, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
+                .add(CastOp(DataType.FLOAT32))
                 .build()
 
+            val inferenceTime = SystemClock.uptimeMillis()
             val tensorImage = TensorImage.fromBitmap(bitmap)
             val processedImage = imageProcessor.process(tensorImage)
 
@@ -70,7 +77,10 @@ class ImageClassifierHelper(
 
             val results = imageClassifier?.classify(processedImage)
 
-            classifierListener?.onResults(results, 0)
+            classifierListener?.onResults(
+                results,
+                inferenceTime)
+
         } catch (e: IOException) {
             classifierListener?.onError("Image classification failed: ${e.message}")
             Log.e(TAG, "Image classification error: ${e.message}", e)

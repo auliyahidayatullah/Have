@@ -7,6 +7,7 @@ import com.capstone.have.data.response.FoodsRecommendationResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import com.capstone.have.data.response.AddSleepResponse
+import com.capstone.have.data.response.UpcomingActivityResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -41,10 +42,14 @@ interface ApiService {
     suspend fun getExercise(
     ): ExerciseResponse
 
-    @GET("activity/{id}")
+    @GET("activity")
     suspend fun getActivity(
-        @Path("id") activityId: String
     ): ActivityResponse
+
+    @GET("activity/{id}")
+    suspend fun getUpcomingActivity(
+        @Path("id") activityId: String
+    ): UpcomingActivityResponse
 
     @GET("recommendations/food")
     suspend fun getFoodRecommendation(
