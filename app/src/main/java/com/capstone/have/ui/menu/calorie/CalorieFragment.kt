@@ -47,6 +47,7 @@ class CalorieFragment : Fragment() {
         val view = binding.root
 
         childFragmentManager.beginTransaction()
+            .replace(R.id.top_calorie_container, BigCaloriesFragment())
             .replace(R.id.food_rec_container, FoodRecomFragment())
             .commit()
 

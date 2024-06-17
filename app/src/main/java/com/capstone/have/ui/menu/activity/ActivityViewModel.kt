@@ -1,5 +1,6 @@
 package com.capstone.have.ui.menu.activity
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,13 +38,15 @@ class ActivityViewModel (private val userRepository: UserRepository, private val
         }
     }
 
-    fun getUpcomingActivity(activityId: String, token : String) {
+    fun getUpcomingActivity(token: String) {
         viewModelScope.launch {
             try {
-                val response = ApiConfig.getApiService(token).getUpcomingActivity(activityId)
+                val response = ApiConfig.getApiService(token).getUpcomingActivity()
+                Log.d("API Response", response.toString())
                 _activity.postValue(response)
             } catch (e: Exception) {
-                _activity.postValue(UpcomingActivityResponse(status = "failed", message = e.message))
+                Log.e("API Error", e.message.toString())
+                _activity.postValue(UpcomingActivityResponse(status = "fail", message = e.message))
             }
         }
     }

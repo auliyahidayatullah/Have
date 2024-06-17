@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class FoodsRecommendationResponse(
 
 	@field:SerializedName("data")
-	val data: Data? = null,
+	val data: FoodRecomData? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -14,7 +14,7 @@ data class FoodsRecommendationResponse(
 	val status: String? = null
 )
 
-data class Data(
+data class FoodRecomData(
 
 	@field:SerializedName("foodRecommendations")
 	val foodRecommendations: List<FoodRecommendationsItem?> = emptyList()
@@ -29,7 +29,7 @@ data class FoodRecommendationsItem(
 	val name: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: String? = null,
 
 	@field:SerializedName("calories")
 	val calories: String? = null

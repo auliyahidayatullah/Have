@@ -19,7 +19,6 @@ class UpcomingActivityFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var userToken: String
     private lateinit var activityViewModel: ActivityViewModel
-    private var activityId: String = ARG_ID
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,17 +37,10 @@ class UpcomingActivityFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             activityViewModel.getUserToken().collect { userModel ->
                 userToken = userModel.token
-
-                arguments?.let {
-                    activityId = it.getString(ARG_ID).orEmpty()
-                }
-
-                val token = userToken
-                activityViewModel.getUpcomingActivity(activityId, token)
+                activityViewModel.getUpcomingActivity(userToken)
             }
         }
 
-        // Observe LiveData outside the launch block
         activityViewModel.activity.observe(viewLifecycleOwner) { response ->
             response?.data?.let { updateUI(it) }
         }
@@ -64,9 +56,5 @@ class UpcomingActivityFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val ARG_ID = "id"
     }
 }

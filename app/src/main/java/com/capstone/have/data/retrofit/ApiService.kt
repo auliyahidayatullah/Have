@@ -8,6 +8,7 @@ import com.capstone.have.data.response.FoodsRecommendationResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import com.capstone.have.data.response.AddSleepResponse
+import com.capstone.have.data.response.BigCaloriesResponse
 import com.capstone.have.data.response.UpcomingActivityResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,14 +52,17 @@ interface ApiService {
     suspend fun getActivity(
     ): ActivityResponse
 
-    @GET("activity/{id}")
+    @GET("/activity/upcoming")
     suspend fun getUpcomingActivity(
-        @Path("id") activityId: String
     ): UpcomingActivityResponse
 
     @GET("recommendations/food")
     suspend fun getFoodRecommendation(
     ): FoodsRecommendationResponse
+
+    @GET("/calories/top3")
+    suspend fun getBigCalories(
+    ): BigCaloriesResponse
 
     @Multipart
     @POST("calories")
@@ -74,4 +78,9 @@ interface ApiService {
         @Field("bedtime") bedtime: String,
         @Field("wakeuptime") wakeuptime: String
     ): AddSleepResponse
+
+    @GET("/sleeps/{sleepId}/duration")
+    suspend fun getSleepDuration(
+        @Path("sleepId") sleepId: String
+    ): ActivityResponse
 }

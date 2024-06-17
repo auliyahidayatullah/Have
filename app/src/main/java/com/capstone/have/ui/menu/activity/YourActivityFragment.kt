@@ -1,5 +1,6 @@
 package com.capstone.have.ui.menu.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.capstone.have.data.Result
 import com.capstone.have.data.response.AllactivityItem
 import com.capstone.have.databinding.FragmentYourActivityBinding
 import com.capstone.have.ui.ViewModelFactory
+import com.capstone.have.ui.activity.AddActivity
 
 
 class YourActivityFragment : Fragment() {
@@ -27,6 +29,10 @@ class YourActivityFragment : Fragment() {
     ): View {
         _binding = FragmentYourActivityBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.btnAddActivity.setOnClickListener {
+            startActivity(Intent(requireActivity(), AddActivity::class.java))
+        }
 
 //        SET RV HORIZONTAL
         val layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)

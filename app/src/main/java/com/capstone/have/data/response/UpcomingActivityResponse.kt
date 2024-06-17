@@ -17,10 +17,10 @@ data class UpcomingActivityResponse(
 data class UpcomingActivityData(
 
 	@field:SerializedName("duration")
-	val duration: Int? = null,
+	val duration: String? = null,
 
 	@field:SerializedName("activityId")
-	val activityId: Int? = null,
+	val activityId: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null
