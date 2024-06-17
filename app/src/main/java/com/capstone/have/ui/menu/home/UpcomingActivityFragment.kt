@@ -45,11 +45,12 @@ class UpcomingActivityFragment : Fragment() {
 
                 val token = userToken
                 activityViewModel.getUpcomingActivity(activityId, token)
-
-                activityViewModel.activity.observe(viewLifecycleOwner) { response ->
-                    response?.data?.let { updateUI(it) }
-                }
             }
+        }
+
+        // Observe LiveData outside the launch block
+        activityViewModel.activity.observe(viewLifecycleOwner) { response ->
+            response?.data?.let { updateUI(it) }
         }
     }
 

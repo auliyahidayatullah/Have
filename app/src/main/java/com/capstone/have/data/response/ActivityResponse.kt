@@ -20,7 +20,7 @@ data class AllactivityItem(
 	val duration: String? = null,
 
 	@field:SerializedName("activityId")
-	val activityId: Int? = null,
+	val activityId: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null

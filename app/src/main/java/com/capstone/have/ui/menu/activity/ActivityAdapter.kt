@@ -27,11 +27,11 @@ class ActivityAdapter : ListAdapter<AllactivityItem, ActivityAdapter.MyViewHolde
 
         fun bind(item: AllactivityItem) {
             // Bind data to views using ViewBinding
+
             binding.iconActivity.setImageResource(R.drawable.ic_activity)
-            binding.iconActivity.setImageResource(R.drawable.ic_time)
+            binding.iconTime.setImageResource(R.drawable.ic_time)
             binding.tvActivity.text = item.name
             binding.tvActivityTime.text = item.duration
-
         }
     }
 

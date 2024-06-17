@@ -16,6 +16,7 @@ import com.capstone.have.data.retrofit.ApiConfig
 import kotlinx.coroutines.launch
 
 class ActivityViewModel (private val userRepository: UserRepository, private val activityRepository: ActivityRepository) : ViewModel() {
+
     private val _activity = MutableLiveData<UpcomingActivityResponse>()
     val activity: LiveData<UpcomingActivityResponse> = _activity
 

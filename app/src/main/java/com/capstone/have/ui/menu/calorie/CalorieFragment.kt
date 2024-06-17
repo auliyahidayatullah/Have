@@ -63,6 +63,7 @@ class CalorieFragment : Fragment() {
             classifierListener = object : ImageClassifierHelper.ClassifierListener {
                 override fun onError(error: String) {
                     Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+                    Log.e("CalorieFragment", "Classifier error: $error")
                 }
 
                 override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
@@ -72,40 +73,38 @@ class CalorieFragment : Fragment() {
                             val predictedLabel = topResult.label.trim().lowercase()
 
                             Log.d("CalorieFragment", "Predicted food: $predictedLabel")
+                            Log.d("CalorieFragment", "Predicted index: ${topResult.index}")
 
-                            val predictedIndex = classIndices[predictedLabel]
+                            // Find the correct label based on the index
+                            val predictedFood = classIndices.entries.firstOrNull { it.value == topResult.index.toString() }?.key
+                            Log.d("CalorieFragment", "Predicted food item from index: $predictedFood")
 
-                            predictedIndex?.let { index ->
-                                val predictedFood = index.toIntOrNull()?.let { classIndices.entries.firstOrNull { it.value == index }?.key }
-
-                                predictedFood?.let {
-                                    val calories = caloriesDict[it]
-                                    if (calories != null) {
-                                        currentImageUri?.let { uri ->
-                                            val intent = Intent(requireContext(), AddFoodActivity::class.java).apply {
-                                                putExtra(AddFoodActivity.EXTRA_FOOD_NAME, it)
-                                                putExtra(AddFoodActivity.EXTRA_CALORIES, calories)
-                                                putExtra(AddFoodActivity.EXTRA_IMAGE_URI, uri.toString())
-                                            }
-                                            startActivity(intent)
+                            predictedFood?.let {
+                                val calories = caloriesDict[it]
+                                if (calories != null) {
+                                    currentImageUri?.let { uri ->
+                                        val intent = Intent(requireContext(), AddFoodActivity::class.java).apply {
+                                            putExtra(AddFoodActivity.EXTRA_FOOD_NAME, it)
+                                            putExtra(AddFoodActivity.EXTRA_CALORIES, calories)
+                                            putExtra(AddFoodActivity.EXTRA_IMAGE_URI, uri.toString())
                                         }
-                                    } else {
-                                        Toast.makeText(requireContext(), "Informasi kalori untuk $it tidak tersedia", Toast.LENGTH_SHORT).show()
-                                        Log.e("CalorieFragment", "Informasi kalori untuk $it tidak tersedia")
+                                        startActivity(intent)
                                     }
-                                } ?: run {
-                                    Toast.makeText(requireContext(), "Invalid prediction index for $predictedLabel", Toast.LENGTH_SHORT).show()
-                                    Log.e("CalorieFragment", "Invalid prediction index for $predictedLabel")
+                                } else {
+                                    Toast.makeText(requireContext(), "Informasi kalori untuk $it tidak tersedia", Toast.LENGTH_SHORT).show()
+                                    Log.e("CalorieFragment", "Informasi kalori untuk $it tidak tersedia")
                                 }
                             } ?: run {
-                                Toast.makeText(requireContext(), "Invalid prediction label: $predictedLabel", Toast.LENGTH_SHORT).show()
-                                Log.e("CalorieFragment", "Invalid prediction label: $predictedLabel")
+                                Toast.makeText(requireContext(), "Invalid prediction index for ${topResult.index}", Toast.LENGTH_SHORT).show()
+                                Log.e("CalorieFragment", "Invalid prediction index for ${topResult.index}")
                             }
                         } else {
                             Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+                            Log.e("CalorieFragment", "No results found")
                         }
                     } ?: run {
                         Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+                        Log.e("CalorieFragment", "No results found")
                     }
                 }
             }
@@ -189,8 +188,7 @@ class CalorieFragment : Fragment() {
     }
 
     private fun openGallery() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        galleryLauncher.launch(galleryIntent)
+        galleryLauncher.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
     }
 
     private fun openFilePicker() {
@@ -218,6 +216,7 @@ class CalorieFragment : Fragment() {
                     val value = jsonObject.getString(key)
                     classIndicesMap[key] = value
                 }
+                Log.d("CalorieFragment", "Loaded class indices: $classIndicesMap")
             }
         } catch (e: IOException) {
             Toast.makeText(requireContext(), "Failed to load class indices", Toast.LENGTH_SHORT).show()
@@ -230,14 +229,12 @@ class CalorieFragment : Fragment() {
         return classIndicesMap
     }
 
-    companion object {
-        private val caloriesDict = mapOf(
-            "egg" to "92 kalori",
-            "orange juice" to "45 kalori",
-            "pancake" to "277 kalori",
-            "rice" to "130 kalori",
-            "sweet tea" to "260 kalori",
-            "waffle" to "291 kalori"
-        )
-    }
+    private val caloriesDict: Map<String, String> = mapOf(
+        "egg" to "92 kalori",
+        "orange juice" to "45 kalori",
+        "pancake" to "277 kalori",
+        "rice" to "130 kalori",
+        "sweet tea" to "260 kalori",
+        "waffle" to "291 kalori"
+    )
 }

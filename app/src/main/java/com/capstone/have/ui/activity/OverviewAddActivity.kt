@@ -13,9 +13,8 @@ class OverviewAddActivity : AppCompatActivity() {
         binding = ActivityOverviewAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnAddActivity.setOnClickListener {
+        binding.btnNextToAdd.setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
-            finish()
         }
     }
 }

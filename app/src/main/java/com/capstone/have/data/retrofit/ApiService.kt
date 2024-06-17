@@ -2,16 +2,21 @@ package com.capstone.have.data.retrofit
 
 import com.capstone.have.data.response.ActivityResponse
 import com.capstone.have.data.response.AddActivityResponse
+import com.capstone.have.data.response.AddCalorieResponse
 import com.capstone.have.data.response.ExerciseResponse
 import com.capstone.have.data.response.FoodsRecommendationResponse
 import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import com.capstone.have.data.response.AddSleepResponse
 import com.capstone.have.data.response.UpcomingActivityResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -55,6 +60,13 @@ interface ApiService {
     suspend fun getFoodRecommendation(
     ): FoodsRecommendationResponse
 
+    @Multipart
+    @POST("calories")
+    suspend fun addCalories(
+        @Part file: MultipartBody.Part,
+        @Part("foodname") foodName: RequestBody,
+        @Part("calories") calories: RequestBody,
+    ): AddCalorieResponse
 
     @FormUrlEncoded
     @POST("sleeps")
