@@ -16,18 +16,15 @@ data class SleepDurationResponse(
 
 data class SleepDurationData(
 
-	@field:SerializedName("duration")
-	val duration: Duration? = null,
-
-	@field:SerializedName("sleepId")
-	val sleepId: Int? = null
-)
-
-data class Duration(
-
 	@field:SerializedName("hours")
 	val hours: Int? = null,
 
+	@field:SerializedName("sleepId")
+	val sleepId: String? = null,
+
 	@field:SerializedName("minutes")
-	val minutes: Int? = null
+	val minutes: Int? = null,
+
+	@field:SerializedName("quality")
+	val quality: String? = null
 )

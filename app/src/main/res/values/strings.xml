@@ -47,7 +47,7 @@
     <string name="food_recommendation">Food Recommendation</string>
     <string name="sleep_analysis">Sleep Analysis</string>
     <string name="currentdate">CurrentDate</string>
-    <string name="quality">Quality</string>
+    <string name="quality">Quality(%)</string>
     <string name="percentage">Percentage</string>
     <string name="sleep_hour">Sleep Hour</string>
     <string name="sleep_duration">Sleep Duration</string>

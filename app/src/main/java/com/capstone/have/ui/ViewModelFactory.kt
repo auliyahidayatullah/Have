@@ -42,7 +42,7 @@ class ViewModelFactory (
                 ActivityViewModel(userRepository, activityRepository) as T
             }
             modelClass.isAssignableFrom(SleepViewModel::class.java) -> {
-                SleepViewModel(sleepRepository) as T
+                SleepViewModel(userRepository,sleepRepository) as T
             }
             modelClass.isAssignableFrom(CalorieViewModel::class.java) -> {
                 CalorieViewModel(calorieRepository, userRepository) as T

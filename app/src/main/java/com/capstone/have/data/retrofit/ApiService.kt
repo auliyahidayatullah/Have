@@ -10,6 +10,7 @@ import com.capstone.have.data.response.RegisterResponse
 import com.capstone.have.data.response.AddSleepResponse
 import com.capstone.have.data.response.BigCaloriesResponse
 import com.capstone.have.data.response.CalorieResponse
+import com.capstone.have.data.response.SleepDurationResponse
 import com.capstone.have.data.response.UpcomingActivityResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -84,8 +85,7 @@ interface ApiService {
         @Field("wakeuptime") wakeuptime: String
     ): AddSleepResponse
 
-    @GET("/sleeps/{sleepId}/duration")
+    @GET("/sleeps/duration")
     suspend fun getSleepDuration(
-        @Path("sleepId") sleepId: String
-    ): ActivityResponse
+    ): SleepDurationResponse
 }

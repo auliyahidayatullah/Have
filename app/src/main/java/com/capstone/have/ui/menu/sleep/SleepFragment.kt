@@ -7,20 +7,27 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.capstone.have.R
+import androidx.lifecycle.lifecycleScope
+import com.capstone.have.data.response.SleepDurationData
 import com.capstone.have.databinding.FragmentSleepBinding
 import com.capstone.have.ui.ViewModelFactory
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.*
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class SleepFragment : Fragment() {
 
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SleepViewModel by viewModels {
+    private val sleepViewModel: SleepViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
+    private lateinit var userToken: String
+
+    // Tambahkan variabel untuk melacak status klik
+    private var isBedtimeClicked = false
+    private var isWakeupClicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,13 +36,7 @@ class SleepFragment : Fragment() {
         _binding = FragmentSleepBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Setup child fragment
-        childFragmentManager.beginTransaction()
-            .replace(R.id.statistic_container, SleepStatisticFragment())
-            .commit()
-
         setupCardViewClicks()
-        observeViewModel()
 
         return view
     }
@@ -45,7 +46,11 @@ class SleepFragment : Fragment() {
             showTimePicker { selectedTime ->
                 binding.itemCard.textTime1.text = selectedTime
                 val currentWakeUpTime = binding.itemCard.textTime2.text.toString()
-                viewModel.addSleep(selectedTime, currentWakeUpTime)
+                sleepViewModel.addSleep(selectedTime, currentWakeUpTime)
+
+                // Update status klik
+                isBedtimeClicked = true
+                checkAndObserveViewModel()
             }
         }
 
@@ -53,11 +58,26 @@ class SleepFragment : Fragment() {
             showTimePicker { selectedTime ->
                 binding.itemCard.textTime2.text = selectedTime
                 val currentBedTime = binding.itemCard.textTime1.text.toString()
-                viewModel.addSleep(currentBedTime, selectedTime)
+                sleepViewModel.addSleep(currentBedTime, selectedTime)
+
+                // Update status klik
+                isWakeupClicked = true
+                checkAndObserveViewModel()
             }
         }
     }
 
+    // Fungsi untuk memeriksa apakah kedua card item telah diklik
+    private fun checkAndObserveViewModel() {
+        if (isBedtimeClicked && isWakeupClicked) {
+            observeViewModel()
+        }
+    }
+
+    private fun updateUI(data: SleepDurationData) {
+        binding.sleepPercentage.text = data.quality
+        binding.sleepHour.text = "${data.hours}h ${data.minutes}m"
+    }
 
     private fun showTimePicker(onTimeSelected: (String) -> Unit) {
         val picker = MaterialTimePicker.Builder()
@@ -82,12 +102,23 @@ class SleepFragment : Fragment() {
         }
     }
 
-
     private fun observeViewModel() {
-        viewModel.addSleepResult.observe(viewLifecycleOwner) { result ->
+        sleepViewModel.addSleepResult.observe(viewLifecycleOwner) { result ->
             when (result.status) {
-                "failed" -> {
+                "fail" -> {
                     showToast("Failed to add sleep: ${result.message}")
+                }
+                else -> {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        sleepViewModel.getUserToken().collect { userModel ->
+                            userToken = userModel.token
+                            sleepViewModel.getSleepDuration(userToken)
+                        }
+                    }
+
+                    sleepViewModel.sleepDuration.observe(viewLifecycleOwner) { response ->
+                        response?.data?.let { updateUI(it) }
+                    }
                 }
             }
         }
