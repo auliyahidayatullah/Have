@@ -17,9 +17,19 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.capstone.have.ImageClassifierHelper
 import com.capstone.have.R
+import com.capstone.have.data.response.CaloriesItem
 import com.capstone.have.databinding.FragmentCalorieBinding
+import com.capstone.have.ui.ViewModelFactory
+import com.capstone.have.ui.menu.activity.ActivityViewModel
+import com.github.mikephil.charting.components.LimitLine
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 import org.tensorflow.lite.task.vision.classifier.Classifications
@@ -29,6 +39,7 @@ class CalorieFragment : Fragment() {
 
     private var _binding: FragmentCalorieBinding? = null
     private val binding get() = _binding!!
+    private lateinit var calorieViewModel: CalorieViewModel
 
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
@@ -57,8 +68,26 @@ class CalorieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        classIndices = loadClassIndices()
+//        SETUP CHART
+        val factory = ViewModelFactory.getInstance(requireContext())
+        calorieViewModel = ViewModelProvider(this, factory)[CalorieViewModel::class.java]
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            calorieViewModel.getUserToken().collect { userModel ->
+                calorieViewModel.getCalorieData(userModel.token)
+            }
+        }
+
+        calorieViewModel.chartData.observe(viewLifecycleOwner) { entries ->
+            updateChart(entries)
+        }
+
+        calorieViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            showError(errorMessage)
+        }
+
+//        SETUP MODEL ML
+        classIndices = loadClassIndices()
         imageClassifierHelper = ImageClassifierHelper(
             context = requireContext(),
             classifierListener = object : ImageClassifierHelper.ClassifierListener {
@@ -111,6 +140,7 @@ class CalorieFragment : Fragment() {
             }
         )
 
+//        SETUP FLOAT BTN
         binding.extendedFab.visibility = View.VISIBLE
         binding.extendedFab.setOnClickListener {
             showPictureDialog()
@@ -119,6 +149,35 @@ class CalorieFragment : Fragment() {
         setupCameraLauncher()
         setupGalleryLauncher()
         setupFileLauncher()
+    }
+
+    private fun updateChart(entries: List<Entry>) {
+        binding.errorMessage.visibility = View.GONE
+        binding.calorieChart.visibility = View.VISIBLE
+
+        val lineDataSet = LineDataSet(entries, "Calories").apply {
+            lineWidth = 3f
+        }
+        val lineData = LineData(lineDataSet)
+        binding.calorieChart.data = lineData
+
+//        SET LIMIT LINE
+        val limitLine = LimitLine(1500f, "Targets")
+        limitLine.lineWidth = 2f
+        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.textSize = 10f
+
+        val yAxis = binding.calorieChart.axisLeft
+        yAxis.addLimitLine(limitLine)
+
+        binding.calorieChart.invalidate() // refresh chart
+    }
+
+    private fun showError(message: String) {
+        binding.calorieChart.visibility = View.GONE
+        binding.errorMessage.visibility = View.VISIBLE
+        binding.errorMessage.text = message
     }
 
     private fun setupCameraLauncher() {

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")
 }
 
 android {
@@ -70,7 +69,6 @@ dependencies {
 
 //    design
     implementation(libs.glide)
-    kapt("com.github.bumptech.glide:compiler:4.12.0")
     implementation (libs.mpandroidchart)
 
 //    tensorflow

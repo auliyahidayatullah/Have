@@ -16,11 +16,23 @@ data class CalorieResponse(
 
 data class CalorieData(
 
+	@field:SerializedName("calories")
+	val calories: List<CaloriesItem?> = emptyList()
+)
+
+data class CaloriesItem(
+
+	@field:SerializedName("image")
+	val image: Any? = null,
+
 	@field:SerializedName("calorieId")
 	val calorieId: String? = null,
 
 	@field:SerializedName("foodname")
 	val foodname: String? = null,
+
+	@field:SerializedName("created")
+	val created: String? = null,
 
 	@field:SerializedName("calories")
 	val calories: Int? = null

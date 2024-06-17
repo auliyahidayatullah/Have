@@ -9,6 +9,7 @@ import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import com.capstone.have.data.response.AddSleepResponse
 import com.capstone.have.data.response.BigCaloriesResponse
+import com.capstone.have.data.response.CalorieResponse
 import com.capstone.have.data.response.UpcomingActivityResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -59,6 +60,10 @@ interface ApiService {
     @GET("recommendations/food")
     suspend fun getFoodRecommendation(
     ): FoodsRecommendationResponse
+
+    @GET("calories")
+    suspend fun getCalories(
+    ): CalorieResponse
 
     @GET("/calories/top3")
     suspend fun getBigCalories(
