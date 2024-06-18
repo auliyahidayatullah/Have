@@ -21,13 +21,15 @@ class ActivityFragment : Fragment() {
 
         childFragmentManager.beginTransaction()
             .replace(R.id.container_yourActivity, YourActivityFragment())
-            .commit()
-
-        childFragmentManager.beginTransaction()
             .replace(R.id.container_exerciseRecommendation, ExerciseRecFragment())
             .commit()
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

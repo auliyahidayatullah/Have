@@ -13,6 +13,7 @@ import com.capstone.have.ui.menu.activity.ActivityViewModel
 import com.capstone.have.ui.menu.sleep.SleepViewModel
 import com.capstone.have.ui.login.SignInViewModel
 import com.capstone.have.ui.main.MainViewModel
+import com.capstone.have.ui.menu.calorie.CalorieViewModel
 import com.capstone.have.ui.signup.SignUpViewModel
 
 class ViewModelFactory (
@@ -41,7 +42,10 @@ class ViewModelFactory (
                 ActivityViewModel(userRepository, activityRepository) as T
             }
             modelClass.isAssignableFrom(SleepViewModel::class.java) -> {
-                SleepViewModel(sleepRepository) as T
+                SleepViewModel(userRepository,sleepRepository) as T
+            }
+            modelClass.isAssignableFrom(CalorieViewModel::class.java) -> {
+                CalorieViewModel(calorieRepository, userRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

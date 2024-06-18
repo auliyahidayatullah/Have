@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/add_your_ac" />
 
     <Button
-        android:id="@+id/btn_addActivity"
+        android:id="@+id/btn_nextToAdd"
         android:layout_width="161dp"
         android:layout_height="51dp"
         android:layout_marginTop="71dp"

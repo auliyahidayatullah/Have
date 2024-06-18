@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.have.R
@@ -37,9 +38,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         //        SETUP SAVE SESSION
-
-
-
+        mainViewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, LandingActivity::class.java))
+                finish()
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

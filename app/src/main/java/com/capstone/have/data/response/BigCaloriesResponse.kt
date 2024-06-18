@@ -2,10 +2,10 @@ package com.capstone.have.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class CalorieResponse(
+data class BigCaloriesResponse(
 
 	@field:SerializedName("data")
-	val data: CalorieData? = null,
+	val bigCaloriesData: List<DataItem?> = emptyList(),
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -14,13 +14,7 @@ data class CalorieResponse(
 	val status: String? = null
 )
 
-data class CalorieData(
-
-	@field:SerializedName("calories")
-	val calories: List<CaloriesItem?> = emptyList()
-)
-
-data class CaloriesItem(
+data class DataItem(
 
 	@field:SerializedName("image")
 	val image: Any? = null,
@@ -31,9 +25,6 @@ data class CaloriesItem(
 	@field:SerializedName("foodname")
 	val foodname: String? = null,
 
-	@field:SerializedName("created")
-	val created: String? = null,
-
 	@field:SerializedName("calories")
-	val calories: Int? = null
+	val calories: String? = null
 )

@@ -31,10 +31,7 @@ class HomeFragment : Fragment() {
         // Setup child fragment
         childFragmentManager.beginTransaction()
             .replace(R.id.upcomingActivity, UpcomingActivityFragment())
-            .commit()
-
-        childFragmentManager.beginTransaction()
-            .replace(R.id.user_progress, ExerciseRecFragment())
+            .replace(R.id.user_progress, HealthOverviewFragment())
             .commit()
 
 //        SETUP BTN LOGOUT
@@ -49,13 +46,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val factory = ViewModelFactory.getInstance(requireContext())
         mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
-
-        mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(requireContext(), LandingActivity::class.java))
-                activity?.finish()
-            }
-        }
     }
 
     override fun onDestroyView() {

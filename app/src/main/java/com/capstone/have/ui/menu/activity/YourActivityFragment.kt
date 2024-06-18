@@ -1,5 +1,6 @@
 package com.capstone.have.ui.menu.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,13 +12,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.have.data.Result
 import com.capstone.have.data.response.AllactivityItem
-import com.capstone.have.databinding.FragmentExerciseRecBinding
+import com.capstone.have.databinding.FragmentYourActivityBinding
 import com.capstone.have.ui.ViewModelFactory
+import com.capstone.have.ui.activity.AddActivity
 
 
 class YourActivityFragment : Fragment() {
 
-    private var _binding: FragmentExerciseRecBinding? = null
+    private var _binding: FragmentYourActivityBinding? = null
     private val binding get() = _binding!!
     private lateinit var activityViewModel: ActivityViewModel
 
@@ -25,14 +27,18 @@ class YourActivityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentExerciseRecBinding.inflate(inflater, container, false)
+        _binding = FragmentYourActivityBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.btnAddActivity.setOnClickListener {
+            startActivity(Intent(requireActivity(), AddActivity::class.java))
+        }
 
 //        SET RV HORIZONTAL
         val layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvExercise.layoutManager = layoutManager
+        binding.rvYourActivity.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
-        binding.rvExercise.addItemDecoration(itemDecoration)
+        binding.rvYourActivity.addItemDecoration(itemDecoration)
 
         return view
     }
@@ -60,7 +66,7 @@ class YourActivityFragment : Fragment() {
     private fun setActivityData(listActivity: List<AllactivityItem>) {
         val adapter = ActivityAdapter()
         adapter.submitList(listActivity)
-        binding.rvExercise.adapter = adapter
+        binding.rvYourActivity.adapter = adapter
     }
 
     override fun onDestroyView() {

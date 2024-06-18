@@ -52,6 +52,7 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
 
             if (activity.isNotBlank() && time.isNotBlank()) {
                 addActivityViewModel.addActivity(activity, time)
+                showPopupDialog()
             } else {
                 Toast.makeText(this, "Activity and Time must be filled!", Toast.LENGTH_SHORT).show()
             }

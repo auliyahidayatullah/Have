@@ -20,7 +20,7 @@ data class SleepData(
 	val wakeuptime: String? = null,
 
 	@field:SerializedName("sleepId")
-	val sleepId: Int? = null,
+	val sleepId: String? = null,
 
 	@field:SerializedName("bedtime")
 	val bedtime: String? = null
