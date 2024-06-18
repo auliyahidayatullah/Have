@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class BigCaloriesResponse(
 
-	@field:SerializedName("data")
-	val bigCaloriesData: List<DataItem?> = emptyList(),
+    @field:SerializedName("data")
+	val bigCaloriesData: List<BigCaloriesDataItem?> = emptyList(),
 
-	@field:SerializedName("message")
+    @field:SerializedName("message")
 	val message: String? = null,
 
-	@field:SerializedName("status")
+    @field:SerializedName("status")
 	val status: String? = null
 )
 
-data class DataItem(
+data class BigCaloriesDataItem(
 
 	@field:SerializedName("image")
 	val image: Any? = null,
