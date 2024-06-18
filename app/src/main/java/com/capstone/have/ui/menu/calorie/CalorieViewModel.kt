@@ -13,13 +13,14 @@ import okhttp3.RequestBody
 import com.capstone.have.data.Result
 import com.capstone.have.data.preference.UserModel
 import com.capstone.have.data.repository.UserRepository
-import com.capstone.have.data.response.CaloriesItem
 import com.capstone.have.data.response.DataItem
 import com.capstone.have.data.retrofit.ApiConfig
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.flow.Flow
+import android.util.Log
 
-class CalorieViewModel (private val calorieRepository: CalorieRepository, private val userRepository: UserRepository) : ViewModel() {
+class CalorieViewModel(private val calorieRepository: CalorieRepository, private val userRepository: UserRepository) : ViewModel() {
+
     private val _uploadResult = MutableLiveData<Result<AddCalorieResponse>>()
     val uploadResult: LiveData<Result<AddCalorieResponse>> = _uploadResult
     private val _chartData = MutableLiveData<List<Entry>>()
@@ -43,12 +44,14 @@ class CalorieViewModel (private val calorieRepository: CalorieRepository, privat
 
     fun addCalories(file: MultipartBody.Part, foodName: RequestBody, calories: RequestBody) {
         viewModelScope.launch {
+            Log.d("CalorieViewModel", "addCalories() called")
             try {
                 val response = calorieRepository.addCalories(file, foodName, calories)
                 _uploadResult.value = Result.Success(response)
-
+                Log.d("CalorieViewModel", "addCalories() success")
             } catch (e: Exception) {
                 _uploadResult.value = Result.Error(e.message ?: "An unknown error occurred")
+                Log.d("CalorieViewModel", "addCalories() error: ${e.message}")
             }
         }
     }

@@ -289,12 +289,12 @@ class CalorieFragment : Fragment() {
         return classIndicesMap
     }
 
-    private val caloriesDict: Map<String, String> = mapOf(
-        "egg" to "92 kalori",
-        "orange juice" to "45 kalori",
-        "pancake" to "277 kalori",
-        "rice" to "130 kalori",
-        "sweet tea" to "260 kalori",
-        "waffle" to "291 kalori"
+    private val caloriesDict: Map<String, Int> = mapOf(
+        "egg" to 92,
+        "orange juice" to 45,
+        "pancake" to 277,
+        "rice" to 130,
+        "sweet tea" to 260,
+        "waffle" to 291
     )
 }
