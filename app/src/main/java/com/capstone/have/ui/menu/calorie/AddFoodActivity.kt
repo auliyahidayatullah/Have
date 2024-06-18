@@ -55,7 +55,7 @@ class AddFoodActivity : AppCompatActivity(), View.OnClickListener {
             binding.imageView.setImageResource(R.drawable.ic_placeholder)
         }
 
-        val caloriesInt = intent.getIntExtra(EXTRA_CALORIES, 0) // Ganti 0 dengan nilai default jika tidak ditemukan
+        val caloriesInt = intent.getIntExtra(EXTRA_CALORIES, 0)
         val calories = caloriesInt.toString()
         binding.edCalories.setText(calories)
 

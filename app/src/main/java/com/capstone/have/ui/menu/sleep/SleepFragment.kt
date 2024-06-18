@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlin.math.roundToInt
 
 class SleepFragment : Fragment() {
 
@@ -28,7 +29,6 @@ class SleepFragment : Fragment() {
     }
     private lateinit var userToken: String
 
-    // Tambahkan variabel untuk melacak status klik
     private var isBedtimeClicked = false
     private var isWakeupClicked = false
 
@@ -68,7 +68,6 @@ class SleepFragment : Fragment() {
                 val currentWakeUpTime = binding.itemCard.textTime2.text.toString()
                 sleepViewModel.addSleep(selectedTime, currentWakeUpTime)
 
-                // Update status klik
                 isBedtimeClicked = true
                 checkAndObserveViewModel()
             }
@@ -80,7 +79,6 @@ class SleepFragment : Fragment() {
                 val currentBedTime = binding.itemCard.textTime1.text.toString()
                 sleepViewModel.addSleep(currentBedTime, selectedTime)
 
-                // Update status klik
                 isWakeupClicked = true
                 checkAndObserveViewModel()
             }
@@ -97,6 +95,9 @@ class SleepFragment : Fragment() {
     private fun updateUI(data: SleepDurationData) {
         binding.sleepPercentage.text = data.quality
         binding.sleepHour.text = "${data.hours}h ${data.minutes}m"
+
+        val qualityPercentage = data.quality?.toFloatOrNull() ?: 0f
+        binding.progressSleep.progress = qualityPercentage.roundToInt()
     }
 
     private fun showTimePicker(onTimeSelected: (String) -> Unit) {
