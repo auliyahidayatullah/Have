@@ -32,6 +32,11 @@ class LandingActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
+
     companion object {
         const val USER_PREFERENCE = "user_prefs"
         const val LOGIN_STATUS = "is_logged_in"

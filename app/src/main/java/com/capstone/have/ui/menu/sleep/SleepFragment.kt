@@ -15,6 +15,8 @@ import com.capstone.have.ui.ViewModelFactory
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
 class SleepFragment : Fragment() {
@@ -44,6 +46,19 @@ class SleepFragment : Fragment() {
         setupCardViewClicks()
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        SETUP CURRENT DATE
+        val calendar = Calendar.getInstance()
+        val currentDate = calendar.time
+
+        val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(currentDate)
+
+        binding.tvDate.text = formattedDate
     }
 
     private fun setupCardViewClicks() {
