@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.have.data.Result
-import com.capstone.have.data.response.DataItem
+import com.capstone.have.data.response.BigCaloriesDataItem
 import com.capstone.have.databinding.FragmentBigCaloriesBinding
 import com.capstone.have.ui.ViewModelFactory
 
@@ -54,7 +54,7 @@ class BigCaloriesFragment : Fragment() {
 
     }
 
-    private fun setBigCaloriesData(listBigCalories: List<DataItem>) {
+    private fun setBigCaloriesData(listBigCalories: List<BigCaloriesDataItem>) {
         val adapter = BigCalorieAdapter()
         adapter.submitList(listBigCalories)
         binding.rvBigCalories.adapter = adapter

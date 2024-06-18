@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.have.data.response.DataItem
+import com.capstone.have.data.response.BigCaloriesDataItem
 import com.capstone.have.databinding.ItemCalorieBinding
 
-class BigCalorieAdapter : ListAdapter<DataItem, BigCalorieAdapter.BigCalorieViewHolder>(DIFF_CALLBACK) {
+class BigCalorieAdapter : ListAdapter<BigCaloriesDataItem, BigCalorieAdapter.BigCalorieViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BigCalorieViewHolder {
         val binding = ItemCalorieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,7 +23,7 @@ class BigCalorieAdapter : ListAdapter<DataItem, BigCalorieAdapter.BigCalorieView
 
     inner class BigCalorieViewHolder(private val binding: ItemCalorieBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: DataItem) {
+        fun bind(item: BigCaloriesDataItem) {
             // Bind data to views using ViewBinding
             Glide.with(binding.root.context)
                 .load(item.image)
@@ -35,12 +35,12 @@ class BigCalorieAdapter : ListAdapter<DataItem, BigCalorieAdapter.BigCalorieView
 
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
-            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BigCaloriesDataItem>() {
+            override fun areItemsTheSame(oldItem:  BigCaloriesDataItem, newItem: BigCaloriesDataItem): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            override fun areContentsTheSame(oldItem: BigCaloriesDataItem, newItem: BigCaloriesDataItem): Boolean {
                 return oldItem == newItem
             }
         }

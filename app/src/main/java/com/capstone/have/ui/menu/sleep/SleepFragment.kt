@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.capstone.have.R
 import com.capstone.have.data.response.SleepDurationData
 import com.capstone.have.databinding.FragmentSleepBinding
 import com.capstone.have.ui.ViewModelFactory
@@ -35,6 +36,10 @@ class SleepFragment : Fragment() {
     ): View {
         _binding = FragmentSleepBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        childFragmentManager.beginTransaction()
+            .replace(R.id.sleep_statistic, SleepStatisticFragment())
+            .commit()
 
         setupCardViewClicks()
 

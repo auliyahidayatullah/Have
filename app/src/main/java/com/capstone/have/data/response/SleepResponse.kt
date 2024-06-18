@@ -1,27 +1,17 @@
 package com.capstone.have.data.response
 
-import com.google.gson.annotations.SerializedName
-
 data class SleepResponse(
-
-	@field:SerializedName("data")
-	val data: SleepData? = null,
-
-	@field:SerializedName("message")
+	val data: List<DataItem?> = emptyList(),
 	val message: String? = null,
-
-	@field:SerializedName("status")
 	val status: String? = null
 )
 
-data class SleepData(
-
-	@field:SerializedName("wakeuptime")
+data class DataItem(
 	val wakeuptime: String? = null,
-
-	@field:SerializedName("sleepId")
-	val sleepId: String? = null,
-
-	@field:SerializedName("bedtime")
-	val bedtime: String? = null
+	val updatedAt: String? = null,
+	val createdAt: String? = null,
+	val id: String? = null,
+	val bedtime: String? = null,
+	val quality: String? = null
 )
+

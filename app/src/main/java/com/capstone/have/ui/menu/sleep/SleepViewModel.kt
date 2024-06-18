@@ -11,6 +11,7 @@ import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.response.AddSleepResponse
 import com.capstone.have.data.response.SleepDurationResponse
 import com.capstone.have.data.retrofit.ApiConfig
+import com.github.mikephil.charting.data.BarEntry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -18,9 +19,12 @@ class SleepViewModel(private val userRepository: UserRepository, private val rep
 
     private val _addSleepResult = MutableLiveData<AddSleepResponse>()
     val addSleepResult: LiveData<AddSleepResponse> = _addSleepResult
-
     private val _sleepDuration = MutableLiveData<SleepDurationResponse>()
     val sleepDuration: LiveData<SleepDurationResponse> = _sleepDuration
+    private val _chartData = MutableLiveData<List<BarEntry>>()
+    val chartData: LiveData<List<BarEntry>> get() = _chartData
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
 
     fun addSleep(bedtime: String, wakeuptime: String) {
         viewModelScope.launch {
@@ -42,6 +46,28 @@ class SleepViewModel(private val userRepository: UserRepository, private val rep
             } catch (e: Exception) {
                 Log.e("API Error", e.message.toString())
                 _sleepDuration.postValue(SleepDurationResponse(status = "fail", message = e.message))
+            }
+        }
+    }
+
+    fun getSleepData(token: String) {
+        viewModelScope.launch {
+            try {
+                val response = ApiConfig.getApiService(token).getSleep()
+                if (response.status == "success") {
+                    val entries = response.data.mapIndexed { index, item ->
+                        try {
+                            item?.quality?.toFloat()?.let { BarEntry(index.toFloat(), it) }
+                        } catch (e: NumberFormatException) {
+                            null // Skip invalid entries
+                        }
+                    }.filterNotNull() ?: emptyList()
+                    _chartData.postValue(entries)
+                } else {
+                    _error.postValue(response.message ?: "Unknown error")
+                }
+            } catch (e: Exception) {
+                _error.postValue(e.message ?: "An error occurred")
             }
         }
     }

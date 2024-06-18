@@ -11,6 +11,7 @@ import com.capstone.have.data.response.AddSleepResponse
 import com.capstone.have.data.response.BigCaloriesResponse
 import com.capstone.have.data.response.CalorieResponse
 import com.capstone.have.data.response.SleepDurationResponse
+import com.capstone.have.data.response.SleepResponse
 import com.capstone.have.data.response.UpcomingActivityResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,7 +21,6 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
-import retrofit2.http.Path
 
 interface ApiService {
     @FormUrlEncoded
@@ -85,7 +85,12 @@ interface ApiService {
         @Field("wakeuptime") wakeuptime: String
     ): AddSleepResponse
 
-    @GET("/sleeps/duration")
+    @GET("sleeps/duration")
     suspend fun getSleepDuration(
     ): SleepDurationResponse
+
+    @GET("sleeps")
+    suspend fun getSleep(
+    ): SleepResponse
+
 }

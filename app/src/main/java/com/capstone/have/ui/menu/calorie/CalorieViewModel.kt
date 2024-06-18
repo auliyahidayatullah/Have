@@ -13,8 +13,7 @@ import okhttp3.RequestBody
 import com.capstone.have.data.Result
 import com.capstone.have.data.preference.UserModel
 import com.capstone.have.data.repository.UserRepository
-import com.capstone.have.data.response.CaloriesItem
-import com.capstone.have.data.response.DataItem
+import com.capstone.have.data.response.BigCaloriesDataItem
 import com.capstone.have.data.retrofit.ApiConfig
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.flow.Flow
@@ -53,7 +52,7 @@ class CalorieViewModel (private val calorieRepository: CalorieRepository, privat
         }
     }
 
-    fun getBigCalories(): LiveData<Result<List<DataItem>>> = liveData {
+    fun getBigCalories(): LiveData<Result<List<BigCaloriesDataItem>>> = liveData {
         emit(Result.Loading)
         try {
             val response = calorieRepository.getBigCalories()
