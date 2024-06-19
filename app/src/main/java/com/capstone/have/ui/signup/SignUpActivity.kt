@@ -33,8 +33,16 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             } else {
                 result.data?.let {signUpResult ->
+                    val username = signUpResult.username ?: ""
                     val token = signUpResult.token ?: ""
-                    signUpViewModel.saveSession(UserModel(token))
+                    signUpViewModel.saveSession(UserModel(username, token))
+
+                    val sharedPreferences = getSharedPreferences(USER_PREFERENCE, MODE_PRIVATE)
+                    with(sharedPreferences.edit()) {
+                        putBoolean("is_logged_in", true)
+                        apply()
+                    }
+
                     Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, OverviewAddActivity::class.java))
                     finish()
@@ -59,5 +67,9 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
             }
 
         }
+    }
+
+    companion object {
+        const val USER_PREFERENCE = "user_prefs"
     }
 }

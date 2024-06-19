@@ -19,6 +19,9 @@ data class RegistData(
 	@field:SerializedName("userId")
 	val userId: String? = null,
 
+	@field:SerializedName("username")
+	val username: String? = null,
+
 	@field:SerializedName("token")
 	val token: String? = null
 )

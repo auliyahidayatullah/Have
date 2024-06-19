@@ -1,10 +1,8 @@
 package com.capstone.have.ui.menu.calorie
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,16 +13,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.capstone.have.ImageClassifierHelper
 import com.capstone.have.R
-import com.capstone.have.data.response.CaloriesItem
 import com.capstone.have.databinding.FragmentCalorieBinding
 import com.capstone.have.ui.ViewModelFactory
-import com.capstone.have.ui.menu.activity.ActivityViewModel
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -41,7 +36,17 @@ class CalorieFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var calorieViewModel: CalorieViewModel
 
-    private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
+            currentImageUri?.let { uri ->
+                handleImageUri(uri)
+            }
+        } else {
+            Toast.makeText(requireContext(), "Gagal mengambil gambar", Toast.LENGTH_SHORT).show()
+        }
+    }
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var fileLauncher: ActivityResultLauncher<Intent>
 
@@ -146,7 +151,6 @@ class CalorieFragment : Fragment() {
             showPictureDialog()
         }
 
-        setupCameraLauncher()
         setupGalleryLauncher()
         setupFileLauncher()
     }
@@ -178,17 +182,6 @@ class CalorieFragment : Fragment() {
         binding.calorieChart.visibility = View.GONE
         binding.errorMessage.visibility = View.VISIBLE
         binding.errorMessage.text = message
-    }
-
-    private fun setupCameraLauncher() {
-        cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val imageUri = result.data?.data
-                imageUri?.let { uri ->
-                    handleImageUri(uri)
-                }
-            }
-        }
     }
 
     private fun setupGalleryLauncher() {
@@ -228,23 +221,8 @@ class CalorieFragment : Fragment() {
     }
 
     private fun openCamera() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED) {
-            requestCameraPermission()
-        } else {
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            cameraLauncher.launch(cameraIntent)
-        }
-    }
-
-    private fun requestCameraPermission() {
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                openCamera()
-            } else {
-                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show()
-            }
-        }.launch(Manifest.permission.CAMERA)
+        currentImageUri = getImageUri(requireContext())
+        launcherIntentCamera.launch(currentImageUri!!)
     }
 
     private fun openGallery() {

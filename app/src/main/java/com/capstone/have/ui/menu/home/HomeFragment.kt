@@ -1,19 +1,17 @@
 package com.capstone.have.ui.menu.home
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.have.R
 import com.capstone.have.databinding.FragmentHomeBinding
-import com.capstone.have.ui.LandingActivity
 import com.capstone.have.ui.ViewModelFactory
-import com.capstone.have.ui.menu.activity.ExerciseRecFragment
+import com.capstone.have.ui.main.MainActivity
 import com.capstone.have.ui.main.MainViewModel
+
 
 class HomeFragment : Fragment() {
 
@@ -53,20 +51,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun logout (){
-        val sharedPreferences = requireActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply()
-
-        // Navigate to LoginActivity and clear the back stack
-        val intent = Intent(activity, LandingActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-
-        // Finish the current activity
-        activity?.finish()
+    private fun logout() {
+        val activity = activity as MainActivity?
+        activity?.logout()
     }
 
-    companion object {
-        private const val USER_PREFERENCE = "user_preferences"
-    }
 }

@@ -42,12 +42,23 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             } else {
                 result.data?.let { loginResult ->
+                    val username = loginResult.username ?: ""
                     val token = loginResult.token ?: ""
-                    viewModel.saveSession(UserModel(token))
+                    viewModel.saveSession(UserModel(username,token))
+
+                    val sharedPreferences = getSharedPreferences(USER_PREFERENCE, MODE_PRIVATE)
+                    with(sharedPreferences.edit()) {
+                        putBoolean("is_logged_in", true)
+                        apply()
+                    }
+
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
             }
         }
+    }
+    companion object {
+        const val USER_PREFERENCE = "user_prefs"
     }
 }
