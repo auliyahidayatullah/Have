@@ -28,20 +28,23 @@
                 android:id="@+id/img_exercise"
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Media" />
+                android:scaleType="centerCrop" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:paddingTop="18dp">
 
                 <TextView
                     android:id="@+id/exercise_name"
-                    android:text="Exercise Name"
+                    android:text="@string/exercise_name"
                     style="@style/CustomTextView"
                     android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textSize="17sp"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +61,9 @@
 
                 <TextView
                     android:id="@+id/exercise_calorie"
-                    android:text="calories"
+                    android:text="@string/calories"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     style="@style/CustomTextView"
                     android:textSize="18sp"
                     app:layout_constraintTop_toBottomOf="@id/exercise_name"

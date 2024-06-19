@@ -8,9 +8,9 @@
     tools:context=".ui.menu.sleep.SleepStatisticFragment">
 
     <TextView
-        android:id="@+id/header_bigCalories"
+        android:id="@+id/header_sleepStatistic"
         style="@style/CustomTextView"
-        android:text="Sleep Statistic"
+        android:text="@string/sleep_statistic"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_bigCalories"
+        app:layout_constraintTop_toBottomOf="@+id/header_sleepStatistic"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -42,6 +42,6 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Error loading data"/>
+        android:text="@string/error_loading_data"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

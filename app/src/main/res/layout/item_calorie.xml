@@ -21,21 +21,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img_recomFood"
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
-                android:contentDescription="Media"
                 android:scaleType="centerCrop" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:paddingStart="18dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="18dp">
 
                 <TextView
                     android:id="@+id/textFoodName"
@@ -43,7 +44,9 @@
                     android:text="@string/food_name"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     android:textSize="17sp"
+                    android:ellipsize="end"
                     android:textStyle="bold"
+                    android:maxLines="1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,9 +62,11 @@
                 <TextView
                     android:id="@+id/calorie_count"
                     style="@style/CustomTextView"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:layout_marginStart="9.84dp"
                     android:layout_marginTop="5dp"
-                    android:text="calories"
+                    android:text="@string/calories"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@id/iconCalorie"
                     app:layout_constraintTop_toBottomOf="@id/textFoodName" />

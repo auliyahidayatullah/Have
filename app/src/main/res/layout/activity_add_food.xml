@@ -15,7 +15,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="?attr/selectableItemBackground"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/baseline_arrow_back_24"
         app:layout_constraintBottom_toTopOf="@+id/textViewFoodName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -38,7 +38,7 @@
     <TextView
         android:id="@+id/textViewFoodName"
         style="@style/CustomTextView.Textfield"
-        android:text="Food Name"
+        android:text="@string/tv_food_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         android:layout_marginTop="28dp" />
@@ -64,7 +64,7 @@
     <TextView
         android:id="@+id/textViewCalorie"
         style="@style/CustomTextView.Textfield"
-        android:text="Calories (kcal)"
+        android:text="@string/tv_calories_kcal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodNameEditTextLayout"
         android:layout_marginTop="16dp" />

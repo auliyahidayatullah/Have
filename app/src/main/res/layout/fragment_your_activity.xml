@@ -17,7 +17,7 @@
             android:id="@+id/header_yourActivity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Your Activity"
+            android:text="@string/your_activity"
             style="@style/CustomTextView"
             android:textStyle="bold"
             android:textSize="30sp"

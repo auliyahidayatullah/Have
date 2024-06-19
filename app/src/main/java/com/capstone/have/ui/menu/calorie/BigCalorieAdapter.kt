@@ -29,7 +29,7 @@ class BigCalorieAdapter : ListAdapter<BigCaloriesDataItem, BigCalorieAdapter.Big
                 .load(item.image)
                 .into(binding.imgRecomFood)
             binding.textFoodName.text = item.foodname
-            binding.calorieCount.text = item.calories
+            binding.calorieCount.text = "${item.calories} kCal"
         }
     }
 

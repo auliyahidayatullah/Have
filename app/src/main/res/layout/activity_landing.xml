@@ -85,7 +85,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:alpha="0"
-        android:text="Next"
+        android:text="@string/next"
         android:textSize="18sp" />
 
     <LinearLayout

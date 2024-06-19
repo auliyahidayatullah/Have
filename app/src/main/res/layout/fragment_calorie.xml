@@ -63,7 +63,7 @@
                     android:id="@+id/textCalorie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1500 kcal"
+                    android:text="@string/_1500_kcal"
                     android:textSize="15sp"
                     style="@style/CustomTextView"
                     android:layout_marginStart="5dp" />
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
-                android:text="Error loading data"/>
+                android:text="@string/error_loading_data"/>
 
             <FrameLayout
                 android:id="@+id/top_calorie_container"
