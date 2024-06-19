@@ -1,5 +1,6 @@
 package com.capstone.have.ui.menu.calorie
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,9 @@ import com.capstone.have.data.Result
 import com.capstone.have.data.preference.UserModel
 import com.capstone.have.data.repository.UserRepository
 import com.capstone.have.data.response.BigCaloriesDataItem
+import com.capstone.have.data.response.CalorieOverviewResponse
+import com.capstone.have.data.response.CalorieResponse
+import com.capstone.have.data.response.SleepDurationResponse
 import com.capstone.have.data.retrofit.ApiConfig
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +29,8 @@ class CalorieViewModel (private val calorieRepository: CalorieRepository, privat
     val chartData: LiveData<List<Entry>> get() = _chartData
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
+    private val _calorieOverview = MutableLiveData<CalorieOverviewResponse>()
+    val calorieOverview: LiveData<CalorieOverviewResponse> = _calorieOverview
 
     fun getCalorieData(token: String) {
         viewModelScope.launch {
@@ -63,6 +69,19 @@ class CalorieViewModel (private val calorieRepository: CalorieRepository, privat
             }
         } catch (e: Exception) {
             emit(Result.Error(e.message ?: "Network error"))
+        }
+    }
+
+    fun getCalorieOverview(token: String) {
+        viewModelScope.launch {
+            try {
+                val response = ApiConfig.getApiService(token).getCalorieOverview()
+                Log.d("API Response", response.toString())
+                _calorieOverview.postValue(response)
+            } catch (e: Exception) {
+                Log.e("API Error", e.message.toString())
+                _calorieOverview.postValue(CalorieOverviewResponse(status = "fail", message = e.message))
+            }
         }
     }
 

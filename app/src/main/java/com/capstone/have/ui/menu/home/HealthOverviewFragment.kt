@@ -1,6 +1,5 @@
 package com.capstone.have.ui.menu.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.capstone.have.R
+import com.capstone.have.data.response.CalorieOverviewData
 import com.capstone.have.data.response.SleepDurationData
 import com.capstone.have.databinding.FragmentHealthOverviewBinding
-import com.capstone.have.databinding.FragmentSleepBinding
 import com.capstone.have.ui.ViewModelFactory
-import com.capstone.have.ui.menu.calorie.CalorieFragment
-import com.capstone.have.ui.menu.sleep.SleepFragment
+import com.capstone.have.ui.menu.calorie.CalorieViewModel
 import com.capstone.have.ui.menu.sleep.SleepViewModel
 import kotlinx.coroutines.launch
 
@@ -25,6 +22,9 @@ class HealthOverviewFragment : Fragment() {
     private val sleepViewModel: SleepViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
+    private val calorieViewModel: CalorieViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
     private lateinit var userToken: String
 
     override fun onCreateView(
@@ -33,8 +33,6 @@ class HealthOverviewFragment : Fragment() {
     ): View {
         _binding = FragmentHealthOverviewBinding.inflate(inflater, container, false)
         val view = binding.root
-
-        setupCardView()
 
         return view
     }
@@ -47,26 +45,30 @@ class HealthOverviewFragment : Fragment() {
                 userToken = userModel.token
                 sleepViewModel.getSleepDuration(userToken)
             }
+
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            calorieViewModel.getUserToken().collect { userModel ->
+                userToken = userModel.token
+                calorieViewModel.getCalorieOverview(userToken)
+            }
         }
 
         sleepViewModel.sleepDuration.observe(viewLifecycleOwner) { response ->
-            response?.data?.let { updateUI(it) }
+            response?.data?.let { updateSleepUI(it) }
+        }
+
+        calorieViewModel.calorieOverview.observe(viewLifecycleOwner) { response ->
+            response?.data?.let { updateCaloriesUI(it) }
         }
     }
 
-    private fun updateUI(data: SleepDurationData) {
+    private fun updateSleepUI(data: SleepDurationData) {
         binding.tvSleepPercentage.text = "${data.quality}%"
     }
 
-    private fun setupCardView(){
-        binding.cardSleepOverview.setOnClickListener{
-            startActivity(Intent(requireContext(), SleepFragment::class.java))
-            requireActivity().finish()
-        }
-
-        binding.cardCalorieOverview.setOnClickListener{
-            startActivity(Intent(requireContext(), CalorieFragment::class.java))
-            requireActivity().finish()
-        }
+    private fun updateCaloriesUI(data: CalorieOverviewData) {
+        binding.tvCaloriePercentage.text = data.calories
     }
 }

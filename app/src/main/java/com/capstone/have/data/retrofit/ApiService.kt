@@ -9,6 +9,7 @@ import com.capstone.have.data.response.LoginResponse
 import com.capstone.have.data.response.RegisterResponse
 import com.capstone.have.data.response.AddSleepResponse
 import com.capstone.have.data.response.BigCaloriesResponse
+import com.capstone.have.data.response.CalorieOverviewResponse
 import com.capstone.have.data.response.CalorieResponse
 import com.capstone.have.data.response.SleepDurationResponse
 import com.capstone.have.data.response.SleepResponse
@@ -92,5 +93,9 @@ interface ApiService {
     @GET("sleeps")
     suspend fun getSleep(
     ): SleepResponse
+
+    @GET("calories/overview")
+    suspend fun getCalorieOverview(
+    ): CalorieOverviewResponse
 
 }
