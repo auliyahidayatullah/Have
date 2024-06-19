@@ -17,6 +17,9 @@ import kotlinx.coroutines.launch
 
 class SleepViewModel(private val userRepository: UserRepository, private val repository: SleepRepository) : ViewModel() {
 
+    val bedTime = MutableLiveData<String>()
+    val wakeUpTime = MutableLiveData<String>()
+
     private val _addSleepResult = MutableLiveData<AddSleepResponse>()
     val addSleepResult: LiveData<AddSleepResponse> = _addSleepResult
     private val _sleepDuration = MutableLiveData<SleepDurationResponse>()

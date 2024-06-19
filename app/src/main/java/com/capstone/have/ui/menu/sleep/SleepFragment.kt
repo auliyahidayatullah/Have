@@ -45,13 +45,20 @@ class SleepFragment : Fragment() {
 
         setupCardViewClicks()
 
+        // Observe sleep duration data and update UI
+        sleepViewModel.sleepDuration.observe(viewLifecycleOwner) { response ->
+            response?.data?.let { sleepData ->
+                updateUI(sleepData)
+            }
+        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        SETUP CURRENT DATE
+        // Setup CURRENT DATE
         val calendar = Calendar.getInstance()
         val currentDate = calendar.time
 
@@ -59,6 +66,14 @@ class SleepFragment : Fragment() {
         val formattedDate = dateFormat.format(currentDate)
 
         binding.tvDate.text = formattedDate
+
+        sleepViewModel.bedTime.observe(viewLifecycleOwner) { bedtime ->
+            binding.itemCard.textTime1.text = bedtime ?: "Set Bedtime"
+        }
+
+        sleepViewModel.wakeUpTime.observe(viewLifecycleOwner) { wakeupTime ->
+            binding.itemCard.textTime2.text = wakeupTime ?: "Set Wakeup Time"
+        }
     }
 
     private fun setupCardViewClicks() {
@@ -66,6 +81,7 @@ class SleepFragment : Fragment() {
             showTimePicker { selectedTime ->
                 binding.itemCard.textTime1.text = selectedTime
                 val currentWakeUpTime = binding.itemCard.textTime2.text.toString()
+                sleepViewModel.bedTime.value = selectedTime
                 sleepViewModel.addSleep(selectedTime, currentWakeUpTime)
 
                 isBedtimeClicked = true
@@ -77,6 +93,7 @@ class SleepFragment : Fragment() {
             showTimePicker { selectedTime ->
                 binding.itemCard.textTime2.text = selectedTime
                 val currentBedTime = binding.itemCard.textTime1.text.toString()
+                sleepViewModel.wakeUpTime.value = selectedTime
                 sleepViewModel.addSleep(currentBedTime, selectedTime)
 
                 isWakeupClicked = true
@@ -85,10 +102,28 @@ class SleepFragment : Fragment() {
         }
     }
 
-    // Fungsi untuk memeriksa apakah kedua card item telah diklik
     private fun checkAndObserveViewModel() {
         if (isBedtimeClicked && isWakeupClicked) {
-            observeViewModel()
+            observeAddSleepResult()
+        }
+    }
+
+    private fun observeAddSleepResult() {
+        sleepViewModel.addSleepResult.observe(viewLifecycleOwner) { result ->
+            when (result.status) {
+                "fail" -> {
+                    showToast("Failed to add sleep: ${result.message}")
+                }
+                else -> {
+                    // Fetch user token and then fetch sleep duration
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        sleepViewModel.getUserToken().collect { userModel ->
+                            userToken = userModel.token
+                            sleepViewModel.getSleepDuration(userToken)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -120,28 +155,6 @@ class SleepFragment : Fragment() {
                 if (hour >= 12) "PM" else "AM"
             )
             onTimeSelected(formattedTime)
-        }
-    }
-
-    private fun observeViewModel() {
-        sleepViewModel.addSleepResult.observe(viewLifecycleOwner) { result ->
-            when (result.status) {
-                "fail" -> {
-                    showToast("Failed to add sleep: ${result.message}")
-                }
-                else -> {
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        sleepViewModel.getUserToken().collect { userModel ->
-                            userToken = userModel.token
-                            sleepViewModel.getSleepDuration(userToken)
-                        }
-                    }
-
-                    sleepViewModel.sleepDuration.observe(viewLifecycleOwner) { response ->
-                        response?.data?.let { updateUI(it) }
-                    }
-                }
-            }
         }
     }
 
