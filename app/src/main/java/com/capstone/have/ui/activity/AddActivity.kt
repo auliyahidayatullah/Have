@@ -2,13 +2,20 @@ package com.capstone.have.ui.activity
 
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.util.Log
 import android.view.View
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.capstone.have.R
 import com.capstone.have.databinding.ActivityAddBinding
 import com.capstone.have.ui.ViewModelFactory
@@ -36,7 +43,7 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
         addActivityViewModel.addActivityResult.observe(this) { result ->
             if (result.status == "failed") {
                 showLoading(false)
-                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                Log.e("AddActivity", "Failed to add activity: ${result.message}")
             } else {
                 showLoading(true)
                 showPopupDialog()
@@ -78,8 +85,17 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
 
     //    SETUP POPUP DIALOG
     private fun showPopupDialog() {
+
+//        CUSTOM TITTLE
+        val title = SpannableString("Activity Added Successfully!")
+        title.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.green)), 0, title.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        title.setSpan(StyleSpan(Typeface.BOLD), 0, title.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+
+
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Activity Added Successfully!")
+        builder.setTitle(title)
         builder.setMessage("Your activity was successfully added.\nDo you want to add another activity?\n(We recommend you to add at least 3 activities.)")
         builder.setPositiveButton("Yes") { _, _ ->
             startActivity(Intent(this, AddActivity::class.java))
@@ -89,7 +105,21 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        builder.show()
+
+//        CUSTOM BUTTON
+        val dialog = builder.create()
+        dialog.show()
+
+        // Ubah gaya teks tombol setelah dialog ditampilkan
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.let { button ->
+            button.setTextColor(ContextCompat.getColor(this, R.color.green))
+            button.setTypeface(null, Typeface.BOLD)
+        }
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.let { button ->
+            button.setTextColor(ContextCompat.getColor(this, R.color.red))
+            button.setTypeface(null, Typeface.BOLD)
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
