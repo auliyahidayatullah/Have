@@ -21,16 +21,16 @@ Have is designed for the productive age of 15-64 years old include men and women
 
 - Home Menu
   
-  ![Home Menu]()
+  ![Home Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.02_cfc0c88e.jpg)
 - Sleep Menu
   
-  ![Sleep Menu]()
+  ![Sleep Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.02_18c6ae2e.jpg)
 - Activity Menu
   
-  ![Activity Menu]()
+  ![Activity Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.02_279e881a.jpg)
 - Calorie Menu
   
-  ![Calories Menu]()
+  ![Calories Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.03_ea91b62c.jpg)
 
 ## Dependencies
 - [Android KTX](https://developer.android.com/kotlin/ktx)
