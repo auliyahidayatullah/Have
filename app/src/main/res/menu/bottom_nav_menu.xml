@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_nav"
+        android:title="@string/title_home" />
+    <item
+        android:id="@+id/navigation_sleep"
+        android:icon="@drawable/ic_sleep_nav"
+        android:title="@string/title_sleep" />
+    <item
+        android:id="@+id/navigation_activity"
+        android:icon="@drawable/ic_activity_nav"
+        android:title="@string/title_activity" />
+    <item
+        android:id="@+id/navigation_calorie"
+        android:icon="@drawable/ic_calories_nav"
+        android:title="@string/title_calorie" />
+
+</menu>

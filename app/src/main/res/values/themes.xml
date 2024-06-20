@@ -3,7 +3,33 @@
     <style name="Base.Theme.Have" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorOutline">@color/green</item>
+        <item name="colorSecondaryContainer" />
+        <item name="colorOnSecondaryContainer">@color/green</item>
+        <item name="colorOnSurface">@color/green</item>
+        <item name="colorPrimaryContainer">@color/green</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
     </style>
 
     <style name="Theme.Have" parent="Base.Theme.Have" />
+
+    <!-- TextView Style -->
+    <style name="CustomTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CustomTextView.Header">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="CustomTextView.Textfield">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">21dp</item>
+    </style>
+
 </resources>

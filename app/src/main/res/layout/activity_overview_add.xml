@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.OverviewAddActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="295dp"
+        android:layout_height="218dp"
+        android:layout_marginTop="100dp"
+        android:contentDescription="@string/overview_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_overview_activity" />
+
+    <TextView
+        android:id="@+id/add_your_ac"
+        android:text="@string/add_your_activity"
+        android:textSize="30sp"
+        style="@style/CustomTextView.Header"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/overview_add_activity"
+        style="@style/CustomTextView"
+        android:layout_width="303dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="17dp"
+        android:gravity="center"
+        android:text="@string/overview_add_activity"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_your_ac" />
+
+    <Button
+        android:id="@+id/btn_nextToAdd"
+        android:layout_width="161dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_shape"
+        android:text="@string/add"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overview_add_activity"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
