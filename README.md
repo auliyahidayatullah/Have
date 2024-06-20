@@ -17,6 +17,7 @@ Have is designed for the productive age of 15-64 years old include men and women
 ![Flowchart](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/HAVE%20FLOWCHART.png)
 
 ## Wireframe
+![Wireframe](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/HAVE%20Wireframes.png)
 
 ## Screenshots
 
