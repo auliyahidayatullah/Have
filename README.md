@@ -21,16 +21,17 @@ Have is designed for the productive age of 15-64 years old include men and women
 
 - Home Menu
   
-  ![Home Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.02_cfc0c88e.jpg)
+  <img width="360" height="800" src="https://github.com/auliyahidayatullah/Have/assets/137795305/7ab7fe80-414a-4ecc-b906-df00bafcf577">
 - Sleep Menu
   
-  ![Sleep Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.02_18c6ae2e.jpg)
+  <img width="360" height="800" src="https://github.com/auliyahidayatullah/Have/assets/137795305/97051d5d-b833-404c-b6fd-3474ad019b62">
 - Activity Menu
   
-  ![Activity Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.02_279e881a.jpg)
+  <img width="360" height="800" src="https://github.com/auliyahidayatullah/Have/assets/137795305/77a53ff4-f682-40a4-9659-50278724aee9">
 - Calorie Menu
   
-  ![Calories Menu](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/WhatsApp%20Image%202024-06-20%20at%2014.23.03_ea91b62c.jpg)
+  <img width="360" height="800" src="https://github.com/auliyahidayatullah/Have/assets/137795305/394326be-ac04-4c27-b29d-56ceba280eeb">
+
 
 ## Dependencies
 - [Android KTX](https://developer.android.com/kotlin/ktx)
