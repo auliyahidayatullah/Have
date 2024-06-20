@@ -5,7 +5,7 @@
 HAVE is health management application designed to help users maintain a healthy lifestyle.
 
 ## Target User
-Have is designed for the productive age of 15-64 years old include men and women who want to monitor and maintain a healthy lifestyle.
+Have is designed for the productive age of 15-50 years old include men and women who want to monitor and maintain a healthy lifestyle.
 
 ## Features
 - **Activity Management**: Schedule daily activities and get remainders.
