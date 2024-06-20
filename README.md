@@ -14,6 +14,7 @@ Have is designed for the productive age of 15-64 years old include men and women
 - **Health Summaries**: Received daily health summaries based on collected data.
 
 ## Flowchart
+![Flowchart](https://github.com/auliyahidayatullah/Have/blob/master/HAVE%20Screenshots%20Apps/HAVE%20FLOWCHART.png)
 
 ## Wireframe
 
